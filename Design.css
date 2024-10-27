@@ -8,18 +8,18 @@ body {
 /* Navigation Bar Container */
 .navbar {
     overflow: hidden; /* Prevents content from overflowing */
-    background-color: #d40b4e; /* Sets the background color of the navbar */
+    background-color: #e9e4e6; /* Sets the background color of the navbar */
 }
 
 /* Navigation Links */
 .navbar a {
     float: left; /* Aligns links to the left */
     display: block; /* Makes the links block elements */
-    color: #f2f2f2; /* Sets the text color */
+    color: #1a09b1; /* Sets the text color */
     text-align: center; /* Centers the text within the links */
     padding: 14px 16px; /* Adds padding around the links */
     text-decoration: none; /* Removes underline from links */
-    border: 1px solid rgb(252, 0, 189); /* Adds a 1px solid border around the links */
+    border: 1px solid rgb(0, 0, 0); /* Adds a 1px solid border around the links */
     border-radius: 7px; /* Rounds the corners of the border */
     margin-right: 20px;
 }
