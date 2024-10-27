@@ -66,6 +66,7 @@ h1.center {
     top: 354.5px; /* Position directly below the image */
     left: 0; /* Align with the left edge of the block */
     text-align: center;
+    text-size-adjust: 18px;
 }
 
 /* Ensure the dropdown stays visible when hovering */
