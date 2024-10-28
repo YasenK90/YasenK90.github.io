@@ -52,22 +52,22 @@ h1 {
     color: white; /* Change text color */
     margin: 0; /* Remove default margin */
     text-align: center; /* Center text */
+    z-index: 10; /* Higher z-index to layer above the image */
+    font-size: 2em; /* Adjust size as needed */
 }
 
 /* Container for blocks in grid */
 .container {
-    margin-top: 0px; /* Reduce the space above the container */
-    display: grid; /* Use grid layout */
-    grid-template-columns: repeat(2, 1fr); /* Create 2 columns of equal width */
-    gap: 20px; /* Add some space between the blocks */
-    justify-items: center; /* Center items horizontally */
-    align-items: center; /* Center items vertically */
-    padding: 20px; /* Add padding around the grid */
     position: relative;
     height: 30vh; /* 30% of the viewport height */
     width: 100%; /* Full width */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Create 2 columns of equal width */
+    gap: 20px; /* Add space between the blocks */
+    justify-items: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    padding: 20px;
 }
-
 /* Block1 and Block2 container styling */
 .Block1, .Block2 {
     position: relative; /* Needed for dropdown positioning */
