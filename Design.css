@@ -70,6 +70,7 @@ h1.center {
     border-bottom: none; /* Remove bottom border to connect it to the dropdown */
     border-radius: 10px 10px 0 0; /* Only round the top corners */
     transition: transform 0.5s ease; /* Smooth transition for zoom effect */
+    
 }
 
 /* Zoom-out animation and instant border enlargement on hover */
@@ -94,6 +95,7 @@ h1.center {
     top: 354.5px; /* Position directly below the image */
     left: 0; /* Align with the left edge of the block */
     text-align: center;
+
 }
 
 /* Ensure the dropdown stays visible when hovering */
