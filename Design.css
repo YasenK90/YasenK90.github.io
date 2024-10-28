@@ -18,7 +18,7 @@ body {
 .navbar a {
     float: left; /* Aligns links to the left */
     display: block; /* Makes the links block elements */
-    color: #1a09b1; /* Sets the text color */
+    color: #f1f0ff; /* Sets the text color */
     text-align: center; /* Centers the text within the links */
     padding: 14px 16px; /* Adds padding around the links */
     text-decoration: none; /* Removes underline from links */
