@@ -147,4 +147,9 @@ h1.center {
     text-align: center; /* Center text */
     z-index: 10; /* Higher z-index to layer above the image */
     font-size: 70px; /* Adjust size as needed */
+    text-shadow: 
+    -1px -1px 0 black,
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black; /* Four shadows to create an outline */
 }
