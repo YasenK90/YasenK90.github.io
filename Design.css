@@ -125,4 +125,5 @@ h1.center {
 
 .image-container {
     position: relative;
+    width: 100%;
 }
