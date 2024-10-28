@@ -29,8 +29,8 @@ body {
 
 /* Navigation Links Hover Effect */
 .navbar a:hover {
-    background-color: #00f7ff; /* Changes background color on hover */
-    color: black; /* Changes text color on hover */
+    background-color: rgba(0, 247, 255, 0.5); /* Changes background color to semi-transparent light blue on hover */
+    color: rgba(255, 255, 255, 0.8); /* Changes text color to semi-transparent off-white on hover */
     text-decoration: underline;
 }
 
