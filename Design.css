@@ -1,0 +1,150 @@
+/* General Styles */
+body {
+    font-family: Arial, Helvetica, sans-serif; /* Set font for the entire document */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+/* Navigation Bar Container */
+.navbar {
+    position: absolute; /* Position the navbar absolutely */
+    top: 0; /* Align it to the top of the page */
+    width: 100%; /* Make it span the full width of the page */
+    z-index: 1000; /* Ensure it appears above other elements */
+    
+}
+
+/* Navigation Links */
+.navbar a {
+    float: left; /* Aligns links to the left */
+    display: block; /* Makes the links block elements */
+    color: #f1f0ff; /* Sets the text color */
+    text-align: center; /* Centers the text within the links */
+    padding: 14px 16px; /* Adds padding around the links */
+    text-decoration: none; /* Removes underline from links */
+    border: 1px solid rgb(0, 0, 0); /* Adds a 1px solid border around the links */
+    border-radius: 7px; /* Rounds the corners of the border */
+    margin-right: 20px;
+    font-family: playfair display;
+}
+
+/* Navigation Links Hover Effect */
+.navbar a:hover {
+    background-color: rgba(206, 206, 206, 0.5); /* Changes background color to semi-transparent light blue on hover */
+    color: rgba(255, 255, 255, 0.8); /* Changes text color to semi-transparent off-white on hover */
+    text-decoration: underline;
+}
+
+.navbar a:last-child {
+    margin-right: 0;
+}
+
+
+/* Container for blocks in grid */
+.container {
+    margin-top: 0px; /* Reduce the space above the container */
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(2, 1fr); /* Create 2 columns of equal width */
+    gap: 20px; /* Add some space between the blocks */
+    justify-items: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    padding: 20px; /* Add padding around the grid */
+}
+
+/* Block1 and Block2 container styling */
+.Block1, .Block2 {
+    position: relative; /* Needed for dropdown positioning */
+    display: inline-block; /* Ensures blocks stack correctly */
+    width: 600px; /* Define consistent width for each block and the dropdown */
+    margin: 15px; /* Margin around the blocks */
+    border-radius: 10px 10px 0 0; /* Rounded top corners only */
+    margin-bottom: 25px;
+}
+
+/* Image styling with zoom-out on hover and instant border change */
+.Block1 img, .Block2 img {
+    max-width: 100%; /* Ensure the image fills the block's width */
+    height: 350px; /* Define consistent height */
+    border: 5px solid rgba(0, 0, 0, 0.8); /* Same color as the dropdown for a seamless connection */
+    border-bottom: none; /* Remove bottom border to connect it to the dropdown */
+    border-radius: 10px 10px 0 0; /* Only round the top corners */
+    transition: transform 0.5s ease; /* Smooth transition for zoom effect */
+    
+}
+
+/* Zoom-out animation and instant border enlargement on hover */
+.Block1 img:hover, .Block2 img:hover {
+    transform: scale(0.95); /* Zoom out by scaling the image down */
+    border-width: 10px; /* Instantly enlarge the border on hover */
+}
+
+/* Dropdown content styling */
+.dropdown-content {
+    display: none; /* Initially hidden */
+    position: absolute; /* Absolute positioning relative to the block */
+    background-color: rgba(0, 0, 0, 0.8); /* Dark background for dropdown */
+    color: white; /* White text color for contrast */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    padding: 4.8px; /* Space inside the dropdown */
+    z-index: 1; /* Ensure it's on top of other elements */
+    opacity: 0; /* Start with opacity 0 for fade-in effect */
+    transition: opacity 1s ease; /* Slow fade-in */
+    border-radius: 0 0 10px 10px; /* Rounded bottom corners only */
+    width: 600px; /* Same width as the block */
+    top: 354.5px; /* Position directly below the image */
+    left: 0; /* Align with the left edge of the block */
+    text-align: center;
+
+}
+
+/* Ensure the dropdown stays visible when hovering */
+.Block1:hover .dropdown-content, 
+.Block2:hover .dropdown-content,
+.dropdown-content:hover {
+    display: block; /* Make it visible */
+    opacity: 1; /* Fade it in */
+}
+
+/* Text inside the dropdown */
+.dropdown-content p {
+    margin: 0;
+    font-size: 14px;
+    color: white; /* White text for readability */
+    text-align: center;
+}
+
+.dropdown-content a {
+    color: #00f7ff; /* Light blue links for contrast */
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    text-decoration: underline;
+}
+
+.background-image {
+    position: relative;
+    width: auto;
+    height: auto;
+}
+
+
+/* Background Image Styling */
+.background-image {
+    position: relative;
+    width: 100%;
+    height: 1000px; /* Adjust as necessary */
+}
+
+/* Heading Styles */
+h1.center {
+    position: absolute;
+    top: 27%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for exact centering */
+    color: white; /* Change text color */
+    margin: 0; /* Remove default margin */
+    text-align: center; /* Center text */
+    z-index: 10; /* Higher z-index to layer above the image */
+    font-size: 2em; /* Adjust size as needed */
+}
