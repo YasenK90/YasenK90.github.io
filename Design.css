@@ -146,5 +146,5 @@ h1.center {
     margin: 0; /* Remove default margin */
     text-align: center; /* Center text */
     z-index: 10; /* Higher z-index to layer above the image */
-    font-size: 2em; /* Adjust size as needed */
+    font-size: 10px; /* Adjust size as needed */
 }
