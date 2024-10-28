@@ -17,21 +17,27 @@
         <a href="About.html" class="rt">About</a>
     </div>
     
-    
-     <style>
+   <style>
+       
         .container {
             position: relative;
-            display: inline-block;
+            height: 30vh; /* 30% of the viewport height */
+            width: 100%; /* Full width */
+            overflow: hidden; /* Prevent overflow */
+        }
+        img {
+            width: 100%; /* Image fills the width of the container */
+            height: 100%; /* Image fills the height of the container */
+            object-fit: cover; /* Maintain aspect ratio and cover the container */
         }
         h1 {
             position: absolute;
-            top: 1000px; /* Adjust as needed */
-            left: 1000px; /* Adjust as needed */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust for exact centering */
             color: white; /* Change text color */
             margin: 0; /* Remove default margin */
-        }
-        img {
-            display: block; /* Remove bottom space */
+            text-align: center; /* Center text */
         }
     </style>
 
