@@ -11,7 +11,6 @@ body {
     top: 0; /* Align it to the top of the page */
     width: 100%; /* Make it span the full width of the page */
     z-index: 1000; /* Ensure it appears above other elements */
-    
 }
 
 /* Navigation Links */
@@ -45,6 +44,16 @@ h1.center {
     margin-bottom: 0px; /* Reduce the space below the heading */
 }
 
+h1 {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for exact centering */
+    color: white; /* Change text color */
+    margin: 0; /* Remove default margin */
+    text-align: center; /* Center text */
+}
+
 /* Container for blocks in grid */
 .container {
     margin-top: 0px; /* Reduce the space above the container */
@@ -54,6 +63,9 @@ h1.center {
     justify-items: center; /* Center items horizontally */
     align-items: center; /* Center items vertically */
     padding: 20px; /* Add padding around the grid */
+    position: relative;
+    height: 30vh; /* 30% of the viewport height */
+    width: 100%; /* Full width */
 }
 
 /* Block1 and Block2 container styling */
@@ -67,14 +79,16 @@ h1.center {
 }
 
 /* Image styling with zoom-out on hover and instant border change */
-.Block1 img, .Block2 img {
+.Block1 img, .Block2 img, .image-container img {
     max-width: 100%; /* Ensure the image fills the block's width */
     height: 350px; /* Define consistent height */
     border: 5px solid rgba(0, 0, 0, 0.8); /* Same color as the dropdown for a seamless connection */
     border-bottom: none; /* Remove bottom border to connect it to the dropdown */
     border-radius: 10px 10px 0 0; /* Only round the top corners */
     transition: transform 0.5s ease; /* Smooth transition for zoom effect */
-    
+    width: 100%; /* Image fills the width of the container */
+    height: 100%; /* Image fills the height of the container */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
 }
 
 /* Zoom-out animation and instant border enlargement on hover */
@@ -99,7 +113,6 @@ h1.center {
     top: 354.5px; /* Position directly below the image */
     left: 0; /* Align with the left edge of the block */
     text-align: center;
-
 }
 
 /* Ensure the dropdown stays visible when hovering */
