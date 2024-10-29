@@ -52,6 +52,7 @@ body {
     align-items: center; /* Center items vertically */
     padding: 20px; /* Add padding around the grid */
     margin-bottom: 0px;
+    transform: translateY(200px);
 }
 
 /* Block1 and Block2 container styling */
@@ -62,7 +63,6 @@ body {
     margin: 15px; /* Margin around the blocks */
     border-radius: 10px 10px 0 0; /* Rounded top corners only */
     margin-bottom: 25px;
-    height: 1000px
 }
 
 /* Image styling with zoom-out on hover and instant border change */
