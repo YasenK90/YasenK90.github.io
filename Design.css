@@ -50,6 +50,7 @@ body {
     justify-items: center; /* Center items horizontally */
     align-items: center; /* Center items vertically */
     padding: 20px; /* Add padding around the grid */
+    margin-bottom: 0px;
 }
 
 /* Block1 and Block2 container styling */
