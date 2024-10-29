@@ -13,7 +13,8 @@ body {
     top: 0; /* Align it to the top of the page */
     width: 100%; /* Make it span the full width of the page */
     z-index: 1000; /* Ensure it appears above other elements */
-    display: inline-block;
+    display: flex; /* Use flexbox for layout */
+    justify-content: flex-start; /* Align items to the left */
 }
 
 /* Navigation Links */
