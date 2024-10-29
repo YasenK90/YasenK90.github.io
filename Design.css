@@ -152,3 +152,9 @@ h1.center {
     -1px  1px 0 black,
      1px  1px 0 black; /* Four shadows to create an outline */
 }
+.end {
+    width:100%;
+    height:50px;
+    margin:0;
+    background-color:#e6ccb3;
+}
