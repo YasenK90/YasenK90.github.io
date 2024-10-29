@@ -52,15 +52,14 @@ body {
     align-items: center; /* Center items vertically */
     padding: 20px; /* Add padding around the grid */
     margin-bottom: 0px;
-    transform: translateY(200px);
 }
 
 /* Block1 and Block2 container styling */
 .Block1, .Block2 {
     position: relative; /* Needed for dropdown positioning */
     display: inline-block; /* Ensures blocks stack correctly */
-    width: 600px; /* Define consistent width for each block and the dropdown */
-    margin: 15px; /* Margin around the blocks */
+    width: 300px; /* Define consistent width for each block and the dropdown */
+    margin: 10px; /* Margin around the blocks */
     border-radius: 10px 10px 0 0; /* Rounded top corners only */
     margin-bottom: 25px;
 }
