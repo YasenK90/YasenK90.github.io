@@ -63,7 +63,7 @@ body {
     margin: 10px; /* Margin around the blocks */
     border-radius: 10px 10px 0 0; /* Rounded top corners only */
     margin-bottom: 25px;
-    transform: translateY(200px); 
+    transform: translateY(400px); 
 }
 
 /* Image styling with zoom-out on hover and instant border change */
