@@ -64,13 +64,13 @@ body {
     margin: 10px; /* Margin around the blocks */
     border-radius: 10px 10px 0 0; /* Rounded top corners only */
     margin-bottom: 25px;
-    transform: translateY(600px); 
+    transform: translateY(400px); 
 }
 
 /* Image styling with zoom-out on hover and instant border change */
 .Block1 img, .Block2 img {
     max-width: 100%; /* Ensure the image fills the block's width */
-    height: 350px; /* Define consistent height */
+    height: 300px; /* Define consistent height */
     border: 5px solid rgba(0, 0, 0, 0.8); /* Same color as the dropdown for a seamless connection */
     border-bottom: none; /* Remove bottom border to connect it to the dropdown */
     border-radius: 10px 10px 0 0; /* Only round the top corners */
