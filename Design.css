@@ -47,7 +47,8 @@ body {
 .container {
     margin-top: 0px; /* Reduce the space above the container */
     display: grid; /* Use grid layout */
-    grid-template-columns: repeat(2, 1fr); /* Create 2 columns of equal width */
+    grid-template-columns: repeat(4, 1fr); /* Create 4 columns of equal width */
+    grid-template-rows: repeat(2, 1fr); /* Create 2 rows of equal height */
     gap: 20px; /* Add some space between the blocks */
     justify-items: center; /* Center items horizontally */
     align-items: center; /* Center items vertically */
