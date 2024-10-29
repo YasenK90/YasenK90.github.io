@@ -96,8 +96,8 @@ body {
     opacity: 0; /* Start with opacity 0 for fade-in effect */
     transition: opacity 1s ease; /* Slow fade-in */
     border-radius: 0 0 10px 10px; /* Rounded bottom corners only */
-    width: 600px; /* Same width as the block */
-    top: 354.5px; /* Position directly below the image */
+    width: 300px; /* Same width as the block */
+    top: 302px; /* Position directly below the image */
     left: 0; /* Align with the left edge of the block */
     text-align: center;
 
