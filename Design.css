@@ -56,8 +56,8 @@ body {
     margin-bottom: 0px;
 }
 
-/* Block1 and Block2 container styling */
-.Block1, .Block2 {
+/* Block1 container styling */
+.Block1 {
     position: relative; /* Needed for dropdown positioning */
     display: inline-block; /* Ensures blocks stack correctly */
     width: 300px; /* Define consistent width for each block and the dropdown */
@@ -68,7 +68,7 @@ body {
 }
 
 /* Image styling with zoom-out on hover and instant border change */
-.Block1 img, .Block2 img {
+.Block1 img {
     max-width: 100%; /* Ensure the image fills the block's width */
     height: 300px; /* Define consistent height */
     border: 5px solid rgba(0, 0, 0, 0.8); /* Same color as the dropdown for a seamless connection */
@@ -79,7 +79,7 @@ body {
 }
 
 /* Zoom-out animation and instant border enlargement on hover */
-.Block1 img:hover, .Block2 img:hover {
+.Block1 img:hover {
     transform: scale(0.95); /* Zoom out by scaling the image down */
     border-width: 10px; /* Instantly enlarge the border on hover */
 }
@@ -105,7 +105,6 @@ body {
 
 /* Ensure the dropdown stays visible when hovering */
 .Block1:hover .dropdown-content, 
-.Block2:hover .dropdown-content,
 .dropdown-content:hover {
     display: block; /* Make it visible */
     opacity: 1; /* Fade it in */
