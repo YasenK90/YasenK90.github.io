@@ -15,6 +15,7 @@ body {
     z-index: 1000; /* Ensure it appears above other elements */
     display: flex; /* Use flexbox for layout */
     justify-content: flex-start; /* Align items to the left */
+
 }
 
 /* Navigation Links */
@@ -62,6 +63,7 @@ body {
     margin: 10px; /* Margin around the blocks */
     border-radius: 10px 10px 0 0; /* Rounded top corners only */
     margin-bottom: 25px;
+    transform: translateY(200px); 
 }
 
 /* Image styling with zoom-out on hover and instant border change */
