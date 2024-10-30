@@ -3,7 +3,11 @@ body {
     margin: 0;
     padding: 0;
 }
-
+.parent {
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: flex-start; /* Align items at the start (you can adjust this) */
+}
 h1.center {
     text-align: center; /* Align the heading text to the center */
     color: #ffffff; /* Set the heading text color */
