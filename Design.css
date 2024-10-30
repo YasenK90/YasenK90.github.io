@@ -158,14 +158,14 @@ h1.center {
     margin: 0;
     background-color: #e6ccb3;
     text-align: center;
-    position: relative; /* Ensures it's in the document flow */
+    position: absolute; /* Ensures it's in the document flow */
     bottom: 0; /* This won't affect placement, just used for styling */
     left: 0; /* Align it to the left */
     z-index: 1000; /* Ensure it appears above other content */
     display: flex; /* Use flexbox for centering content */
     align-items: center; /* Center content vertically */
     justify-content: center; /* Center content horizontally */
-    transform: translateY(700px)
+    transform: translateY(400px)
 }
 
 
