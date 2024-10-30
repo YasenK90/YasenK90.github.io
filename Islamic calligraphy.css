@@ -7,6 +7,7 @@ body {
     display: flex; /* Enable flexbox */
     justify-content: center; /* Center horizontally */
     align-items: flex-start; /* Align items at the start (you can adjust this) */
+    width: 100%; /* Make the container take the full width */
 }
 h1.center {
     text-align: center; /* Align the heading text to the center */
