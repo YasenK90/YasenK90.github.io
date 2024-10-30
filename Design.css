@@ -165,7 +165,7 @@ h1.center {
     display: flex; /* Use flexbox for centering content */
     align-items: center; /* Center content vertically */
     justify-content: center; /* Center content horizontally */
-    transform: translateY(400px)
+    transform: translateY(300px)
 }
 
 
