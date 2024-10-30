@@ -3,15 +3,3 @@ body {
     margin: 0;
     padding: 0;
 }
-h1.center {
-    text-align: center; /* Align the heading text to the center */
-    color: #ffffff; /* Set the heading text color */
-    margin-bottom: 0px; /* Reduce the space below the heading */
-    transform: translateY(300px);
-    transform: translateX(300px);
-    text-shadow: 
-        -2px -2px 0 #800000,  
-        2px -2px 0 #800000,
-        -2px 2px 0 #800000,
-        2px 2px 0 #800000; /* Creates a stroke effect */
-}
