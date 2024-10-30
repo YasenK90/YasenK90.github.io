@@ -7,4 +7,10 @@ h1.center {
     text-align: center;
     color: #ffffff;
     margin-bottom: 0px;
+    transform: translateY(20px); /* Adjust the value to move it down */
+    text-shadow: 
+        -1px -1px 0 #000000,  
+        1px -1px 0 #000000,
+        -1px 1px 0 #000000,
+        1px 1px 0 #000000; /* Creates a stroke effect */
 }
