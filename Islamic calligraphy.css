@@ -3,3 +3,12 @@ body {
     margin: 0;
     padding: 0;
 }
+h1.center {
+    text-align: center; /* Align the heading text to the center */
+    color: #ffffff; /* Set the heading text color */
+    text-shadow: 
+        -2px -2px 0 #800000,  
+        2px -2px 0 #800000,
+        -2px 2px 0 #800000,
+        2px 2px 0 #800000; /* Creates a stroke effect */
+}
