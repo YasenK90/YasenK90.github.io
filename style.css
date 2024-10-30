@@ -1,0 +1,56 @@
+/* General style */
+
+.background-image {
+    position: absolute; 
+    top: 0;          
+    left: 0;       
+    width: 100%;    
+    height: 1700px;   
+    background-image: url('sara.jfif'); 
+    background-size: cover; 
+    background-position: center; 
+    z-index: -1; 
+}
+
+header{
+    
+    text-shadow: 
+    -2px -2px 0 black,  
+     2px -2px 0 black,
+    -2px  2px 0 black,
+     2px  2px 0 black; 
+}
+
+.navblocks {
+    display: flex;
+    justify-content: space-between; 
+    padding: 0px; 
+    background-color: #ebe6e0; 
+    transform: translateY(300px);
+}
+
+.blocks {
+    margin: 40px;
+    text-align: bottom;
+    border: 6px solid #a4ced6;
+        border-radius: 8px; 
+        margin: 20px; 
+        padding: 6px;
+        text-align: center; 
+        transition: transform 0.2s;
+}
+
+.blocks img {
+    width: 450px; 
+    height: 450px; 
+    object-fit: cover; 
+    border-radius: 8px; 
+}
+
+.dropdown-content {
+    display: none; /* Initially hide dropdown content */
+}
+
+.blocks:hover .dropdown-content {
+    display: block; /* Show dropdown on hover */
+}
