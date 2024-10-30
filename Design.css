@@ -30,6 +30,8 @@ body {
     border-radius: 7px; /* Rounds the corners of the border */
     margin-right: 20px;
     font-family: playfair display;
+    margin-top: 5px;
+    margin-left: 7px;
 }
 
 /* Navigation Links Hover Effect */
