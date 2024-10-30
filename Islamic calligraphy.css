@@ -15,7 +15,7 @@ h1.center {
     color: #ffffff; /* Set the heading text color */
     margin-bottom: 0px; /* Reduce the space below the heading */
     transform: translateY(30px); /* Adjust the value to move it down */
-    transform: translateX(30px);
+    transform: translateX(60px);
     text-shadow: 
         -2px -2px 0 #800000,  
         2px -2px 0 #800000,
