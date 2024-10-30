@@ -10,8 +10,9 @@ h1.center {
     margin-bottom: 0px; /* Reduce the space below the heading */
     transform: translateY(50px); /* Adjust the value to move it down */
     text-shadow: 
-        -1px -1px 0 #800000,  
-        1px -1px 0 #800000,
-        -1px 1px 0 #800000,
-        1px 1px 0 #800000; /* Creates a stroke effect */
+        -2px -2px 0 #800000,  
+        2px -2px 0 #800000,
+        -2px 2px 0 #800000,
+        2px 2px 0 #800000; /* Creates a stroke effect */
+    display: inline-block;
 }
