@@ -8,6 +8,7 @@ body {
     justify-content: center; /* Center horizontally */
     align-items: flex-start; /* Align items at the start (you can adjust this) */
     width: 100%; /* Make the container take the full width */
+    height: 100vh; /* Optional: Make the container full viewport height */
 }
 h1.center {
     text-align: center; /* Align the heading text to the center */
