@@ -7,8 +7,8 @@ h1.center {
     text-align: center; /* Align the heading text to the center */
     color: #ffffff; /* Set the heading text color */
     margin-bottom: 0px; /* Reduce the space below the heading */
-    transform: translateY(0px);
-    transform: translateX(0px);
+    transform: translateY(30px);
+    transform: translateX(30px);
     text-shadow: 
         -2px -2px 0 #800000,  
         2px -2px 0 #800000,
