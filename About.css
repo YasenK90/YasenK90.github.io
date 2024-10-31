@@ -1,0 +1,101 @@
+/* General Styles */
+body {
+    font-family: Arial, Helvetica, sans-serif; /* Set font for the entire document */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    overflow-x: hidden;
+    margin-bottom: 0; /* Remove space between background image and container */
+}
+
+/* Navigation Bar Container */
+.navbar {
+    position: absolute; /* Position the navbar absolutely */
+    top: 0; /* Align it to the top of the page */
+    width: 100%; /* Make it span the full width of the page */
+    z-index: 1000; /* Ensure it appears above other elements */
+    display: flex; /* Use flexbox for layout */
+    justify-content: flex-start; /* Align items to the left */
+
+}
+
+/* Navigation Links */
+.navbar a {
+    float: left; /* Aligns links to the left */
+    display: block; /* Makes the links block elements */
+    color: #000000; /* Sets the text color */
+    text-align: center; /* Centers the text within the links */
+    padding: 14px 16px; /* Adds padding around the links */
+    text-decoration: none; /* Removes underline from links */
+    border: 1px solid rgb(0, 0, 0); /* Adds a 1px solid border around the links */
+    border-radius: 7px; /* Rounds the corners of the border */
+    margin-right: 20px;
+    font-family: playfair display;
+    margin-top: 5px;
+    margin-left: 7px;
+}
+
+/* Navigation Links Hover Effect */
+.navbar a:hover {
+    background-color: rgba(206, 206, 206, 0.5); /* Changes background color to semi-transparent light blue on hover */
+    color: rgba(255, 255, 255, 0.8); /* Changes text color to semi-transparent off-white on hover */
+    text-decoration: underline;
+}
+
+.navbar a:last-child {
+    margin-right: 0;
+}
+
+/* Container for blocks in grid */
+.big-container {
+    display: grid;  /* Use flexbox for layout */
+    grid-template-columns: repeat(4, 1fr); /*Create 4 columns of equal width*/gap: 20px;
+    justify-items: center;
+    align-items: center;
+    padding:0px;
+    position: absolute; /* Enables layering */
+    bottom: 15px;;
+    z-index: 5; /* Brings .container above the background image */
+    margin:0;
+    margin-top:0px;
+    gap: 20px;
+
+}
+
+/* Heading Styles */
+h1.center {
+    position: absolute;
+    top: 25%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for exact centering */
+    color: white; /* Change text color */
+    margin: 0; /* Remove default margin */
+    text-align: center; /* Center text */
+    z-index: 10; /* Higher z-index to layer above the image */
+    font-size: 70px; /* Adjust size as needed */
+    text-shadow: 
+    -1px -1px 0 black,
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black; /* Four shadows to create an outline */
+}
+
+.background-image {
+    position: relative; /* Ensure it covers the background */
+    width: 100%;
+    height: 1000px; /* Adjust as needed */
+    top: 0; /* Position it at the top */
+    z-index: -1; /*Keep it below other elements*/
+}
+
+.end {
+    width: 100%;
+    height: 75px;
+    margin: 0;
+    background-color: #e6ccb3;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Keeps it below the background image */
+    
+}
