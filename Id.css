@@ -13,8 +13,7 @@
     flex-flow: wrap; 
     padding: 5px;
     margin-left: 20px;
-    boarder: 5px
-    boarder-color: #B3926F;
+    border: 5px solid #B3926F;
 }
 
 .font{
