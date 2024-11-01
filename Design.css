@@ -133,8 +133,7 @@ body {
     position: absolute;
     width: 100%;
     height: 1000px; /* Adjust as necessary */
-    */ margin-bottom: 0px; /* Ensure no space below the background image */ */
-    padding: 100px;
+    margin-top: 0px; /* Ensure no space below the background image */
 }
 
 /* Heading Styles */
