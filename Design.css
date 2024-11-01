@@ -55,6 +55,7 @@ body {
     justify-items: center; /* Center items horizontally */
     align-items: center; /* Center items vertically */
     padding-right: 7px; /* Add padding around the grid */
+    padding-bottom: 20px; /* Add padding below the grid */
     margin-bottom: 0px;
 }
 
