@@ -28,8 +28,8 @@ header{
 }
 
 .blocks img {
-    width: 250px; 
-    height: 250px; 
+    width: 350px; 
+    height: 350px; 
     object-fit: cover; 
     border-radius: 8px; 
 }
