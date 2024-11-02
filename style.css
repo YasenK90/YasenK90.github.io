@@ -5,13 +5,11 @@
     top: 0;          
     left: 0;       
     width: 100%;    
-    height: 1000px;   
+    height: 1700px;   
     background-image: url('sara.jfif'); 
     background-size: cover; 
     background-position: center; 
-    background-repeat: no-repeat;
-    z-index: 0; 
-    background-attachment: fixed;
+    z-index: -1; 
 }
 
 header{
@@ -34,7 +32,7 @@ header{
 .blocks {
     margin: 40px;
     text-align: bottom;
-    border: 6px solid #c98e5d;
+    border: 6px solid #a4ced6;
         border-radius: 8px; 
         margin: 20px; 
         padding: 6px;
@@ -43,8 +41,8 @@ header{
 }
 
 .blocks img {
-    width: 300px; 
-    height: 300px; 
+    width: 450px; 
+    height: 450px; 
     object-fit: cover; 
     border-radius: 8px; 
 }
