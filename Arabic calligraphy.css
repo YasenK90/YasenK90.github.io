@@ -18,4 +18,5 @@ table, th, td {
     color: #800000;
     padding: 15px;
     text-align: center;
+    vertical-align: center;
 }
