@@ -14,5 +14,6 @@ h1.center {
 }
 table, th, td {
     width: 100%;
+    font-size: 24px;
     color: #800000;
 }
