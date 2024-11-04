@@ -16,4 +16,6 @@ table, th, td {
     width: 100%;
     font-size: 24px;
     color: #800000;
+    padding: 15px;
+    text-align: center;
 }
