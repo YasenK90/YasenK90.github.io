@@ -22,4 +22,5 @@ table, th, td {
     text-align: center;
     vertical-align: center;
     border-bottom: 1px solid #800000;
+    transform: translate(0, 50%);
 }
