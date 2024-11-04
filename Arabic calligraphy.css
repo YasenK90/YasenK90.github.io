@@ -14,6 +14,7 @@ h1.center {
         2px 2px 0 #800000; /* Creates a stroke effect */
 }
 table, th, td {
+    background-color: #fef1e0;
     width: 100%;
     font-size: 24px;
     color: #800000;
