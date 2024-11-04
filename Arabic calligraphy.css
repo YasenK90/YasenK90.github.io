@@ -2,6 +2,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #fef1e0;
 }
 h1.center {
     text-align: center; /* Align the heading text to the center */
