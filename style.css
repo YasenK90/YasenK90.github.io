@@ -1,11 +1,36 @@
-.background-image {
-    position: relative;
-    top: 0px;
-    left: 0px;
+
+
+.navbar {
+    position: absolute; 
+    top: 0; 
     width: 100%;
-    z-index: -1;
+    z-index: 1000; 
+    display: flex; 
+    justify-content: flex-start;
+}
+.navbar a {
+    float: left; 
+    display: block;
+    color: #000000; 
+    text-align: center; 
+    padding: 22px 24px; 
+    text-decoration: none; 
+    border: 1px solid rgb(0, 0, 0); 
+    border-radius: 7px; 
+    margin-right: 20px;
+    font-family: playfair display;
+    margin-top: 5px;
+    margin-left: 7px;
 }
 
+
+.yarab {
+     
+    width: 100%;    
+    height: 400px;   
+    z-index: -1;
+   
+}
 
 header{
     
@@ -16,77 +41,52 @@ header{
      2px  2px 0 black; 
 }
 
-.navbar {
-    position: absolute;
-    top: 0;
-    width: 100%; 
-    z-index: 1000; 
-    display: flex; 
-    justify-content: flex-start; 
-
-}
-
-
-.navbar a {
-    float: left; 
-    display: block; 
-    color: #000000; 
-    text-align: center; 
-    padding: 14px 16px; 
-    text-decoration: none;
-    border: 1px solid rgb(0, 0, 0); 
-    border-radius: 7px; 
-    margin-right: 20px;
-    font-family: playfair display;
-    margin-top: 5px;
-    margin-left: 7px;
-}
-
-
 .navblocks {
     display: flex;
     justify-content: space-between; 
     padding: 0px; 
     background-color: #ebe6e0; 
-    transform: translateY(300px);
+    transform: translateY(-100px);
 }
 
 .blocks {
     margin: 40px;
     text-align: bottom;
-    border: 6px solid #a4ced6;
+    border: 6px solid #c98e5d;
         border-radius: 8px; 
-        margin: 10px; 
+        margin: 20px; 
         padding: 6px;
         text-align: center; 
         transition: transform 0.2s;
 }
 
 .blocks img {
-    width: 300px; 
-    height: 300px; 
+    width: 450px; 
+    height: 450px; 
     object-fit: cover; 
     border-radius: 8px; 
 }
 
 .dropdown-content {
-    display: none; 
+    display: none; /* Initially hide dropdown content */
 }
 
 .blocks:hover .dropdown-content {
-    display: block; 
+    display: block; /* Show dropdown on hover */
 }
 
-
-
 .end {
+    position: relative;
+    left: 0%;
     width: 100%;
-    height: 75px;
+    height: 100px;
     margin: 0;
-    margin-top: 370px; 
+    margin-top: 120px; 
     background-color: #e6ccb3;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    transform: translateY(50px)
+    translateX(-10px);
 }
