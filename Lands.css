@@ -1,4 +1,4 @@
-/* General Styles */
+
 body {
     margin: 0;
     padding: 0;
@@ -6,7 +6,6 @@ body {
     font-family: "Comic Sans MS";
 }
 
-/* Navigation Bar Container */
 .navbar {
     position: absolute;
     top: 0;
@@ -16,7 +15,7 @@ body {
     justify-content: flex-start;
 }
 
-/* Navigation Links */
+
 .navbar a {
     float: left;
     display: block;
@@ -56,7 +55,7 @@ body {
     z-index: 10;
 }
 
-/* Block container styling */
+
 .Block {
     position: relative;
     display: inline-block;
@@ -68,7 +67,7 @@ body {
     z-index: 10;
 }
 
-/* Image styling */
+
 .Block img {
     width: 100%;
     height: 100%;
