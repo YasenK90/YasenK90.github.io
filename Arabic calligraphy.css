@@ -5,8 +5,8 @@ body {
     background-color: #fef1e0;
 }
 h1.center {
-    text-align: center; /* Align the heading text to the center */
-    color: #ffffff; /* Set the heading text color */
+    text-align: center;
+    color: #ffffff;
     text-shadow: 
         -2px -2px 0 #800000,  
         2px -2px 0 #800000,
