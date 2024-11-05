@@ -12,10 +12,10 @@ h1.center {
         2px -2px 0 #800000,
         -2px 2px 0 #800000,
         2px 2px 0 #800000;
-        margin-bottom: 30px;
+        margin-bottom: 50px;
 }
 table, th, td {
-    margin-top: 200px;
+    margin-top: 300px;
     background-color: #fef1e0;
     width: 100%;
     font-size: 24px;
