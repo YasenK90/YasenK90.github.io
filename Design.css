@@ -1,43 +1,39 @@
-/* General Styles */
 body {
-    font-family: Arial, Helvetica, sans-serif; /* Set font for the entire document */
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
-    margin-bottom: 0; /* Remove space between background image and container */
+    margin-bottom: 0;
 }
 
-/* Navigation Bar Container */
 .navbar {
-    position: absolute; /* Position the navbar absolutely */
-    top: 0; /* Align it to the top of the page */
-    width: 100%; /* Make it span the full width of the page */
-    z-index: 1000; /* Ensure it appears above other elements */
-    display: flex; /* Use flexbox for layout */
-    justify-content: flex-start; /* Align items to the left */
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-start;
 
 }
 
-/* Navigation Links */
 .navbar a {
-    float: left; /* Aligns links to the left */
-    display: block; /* Makes the links block elements */
-    color: #000000; /* Sets the text color */
-    text-align: center; /* Centers the text within the links */
-    padding: 14px 16px; /* Adds padding around the links */
-    text-decoration: none; /* Removes underline from links */
-    border: 1px solid rgb(0, 0, 0); /* Adds a 1px solid border around the links */
-    border-radius: 7px; /* Rounds the corners of the border */
+    float: left;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 7px; 
     margin-right: 20px;
     font-family: playfair display;
     margin-top: 5px;
     margin-left: 7px;
 }
 
-/* Navigation Links Hover Effect */
 .navbar a:hover {
-    background-color: rgba(206, 206, 206, 0.5); /* Changes background color to semi-transparent light blue on hover */
-    color: rgba(255, 255, 255, 0.8); /* Changes text color to semi-transparent off-white on hover */
+    background-color: rgba(206, 206, 206, 0.5);
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: underline;
 }
 
@@ -45,88 +41,80 @@ body {
     margin-right: 0;
 }
 
-/* Container for blocks in grid */
 .container {
-    margin-top: 0px; /* Reduce the space above the container */
-    display: grid; /* Use grid layout */
-    grid-template-columns: repeat(4, 1fr); /* Create 4 columns of equal width */
-    grid-template-rows: repeat(2, 1fr); /* Create 2 rows of equal height */
-    gap: 20px; /* Add some space between the blocks */
-    justify-items: center; /* Center items horizontally */
-    align-items: center; /* Center items vertically */
-    padding-bottom: 20px; /* Add padding below the grid */
-    padding-right: 7px; /* Add padding around the grid */
+    margin-top: 0px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    padding-bottom: 20px;
+    padding-right: 7px;
     margin-bottom: 0px;
 }
 
-/* Block1 container styling */
 .Block1 {
-    position: relative; /* Needed for dropdown positioning */
-    display: inline-block; /* Ensures blocks stack correctly */
-    width: 300px; /* Define consistent width for each block and the dropdown */
-    margin: 10px; /* Margin around the blocks */
-    border-radius: 10px 10px 0 0; /* Rounded top corners only */
+    position: relative;
+    display: inline-block;
+    width: 300px;
+    margin: 10px;
+    border-radius: 10px 10px 0 0;
     margin-bottom: 25px;
     transform: translateY(370px); 
 }
 
-/* Image styling with zoom-out on hover and instant border change */
 .Block1 img {
-    width: 100%; /* Ensure the image fills the block's width */
-    height: 300px; /* Define consistent height */
-    object-fit: cover; /* Ensure images fill the box without distortion */
-    border: 5px solid rgba(0, 0, 0, 0.8); /* Same color as the dropdown for a seamless connection */
-    border-bottom: none; /* Remove bottom border to connect it to the dropdown */
-    border-radius: 10px 10px 0 0; /* Only round the top corners */
-    transition: transform 0.8s ease; /* Smooth transition for zoom effect */
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border: 5px solid rgba(0, 0, 0, 0.8);
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    transition: transform 0.8s ease;
 }
 
-/* Zoom-out animation and instant border enlargement on hover */
 .Block1 img:hover {
-    transform: scale(0.95); /* Zoom out by scaling the image down */
-    border-width: 10px; /* Instantly enlarge the border on hover */
+    transform: scale(0.95);
+    border-width: 10px;
 }
 
-/* Dropdown content styling */
 .dropdown-content {
-    display: none; /* Initially hidden */
-    position: absolute; /* Absolute positioning relative to the block */
-    background-color: rgba(0, 0, 0, 0.8); /* Dark background for dropdown */
-    color: white; /* White text color for contrast */
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-    padding: 4.8px; /* Space inside the dropdown */
-    z-index: 1; /* Ensure it's on top of other elements */
-    opacity: 0; /* Start with opacity 0 for fade-in effect */
-    transition: opacity 1s ease; /* Slow fade-in */
-    border-radius: 0 0 10px 10px; /* Rounded bottom corners only */
-    width: 300px; /* Same width as the block */
-    top: 302px; /* Position directly below the image */
-    left: 0; /* Align with the left edge of the block */
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 4.8px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1s ease;
+    border-radius: 0 0 10px 10px;
+    width: 300px;
+    top: 302px;
+    left: 0;
     text-align: center;
 }
 
-/* Ensure the dropdown stays visible when hovering */
 .Block1:hover .dropdown-content, 
 .dropdown-content:hover {
-    /* transform: scale(0.95); Zoom out by scaling the image down */
-    display: block; /* Make it visible */
-    opacity: 1; /* Fade it in */
+    display: block;
+    opacity: 1;
     justify-content: center;
     align-items: center;
     width: 294.5px;
     left: 8px;
 }
 
-/* Text inside the dropdown */
 .dropdown-content p {
     margin: 0;
     font-size: 14px;
-    color: white; /* White text for readability */
+    color: white;
     text-align: center;
 }
 
 .dropdown-content a {
-    color: #00f7ff; /* Light blue links for contrast */
+    color: #00f7ff;
     text-decoration: none;
 }
 
@@ -137,32 +125,31 @@ body {
 .background-image {
     position: absolute;
     width: 100%;
-    height: 1000px; /* Adjust as necessary */
-    margin-top: 0px; /* Ensure no space below the background image */
+    height: 1000px;
+    margin-top: 0px;
 }
 
-/* Heading Styles */
 h1.center {
     position: absolute;
-    top: 27%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Adjust for exact centering */
-    color: white; /* Change text color */
-    margin: 0; /* Remove default margin */
-    text-align: center; /* Center text */
-    z-index: 10; /* Higher z-index to layer above the image */
-    font-size: 70px; /* Adjust size as needed */
+    top: 27%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    margin: 0;
+    text-align: center;
+    z-index: 10;
+    font-size: 70px;
     text-shadow: 
     -1px -1px 0 black,
      1px -1px 0 black,
     -1px  1px 0 black,
-     1px  1px 0 black; /* Four shadows to create an outline */
+     1px  1px 0 black;
 }
 .end {
     width: 100%;
     height: 75px;
     margin: 0;
-    margin-top: 370px; /* Add space above footer */
+    margin-top: 370px;
     background-color: #e6ccb3;
     text-align: center;
     display: flex;
