@@ -68,11 +68,11 @@ header{
 }
 
 .dropdown-content {
-    display: none; /* Initially hide dropdown content */
+    display: none; 
 }
 
 .blocks:hover .dropdown-content {
-    display: block; /* Show dropdown on hover */
+    display: block; 
 }
 
 .end {
