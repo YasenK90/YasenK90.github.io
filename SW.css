@@ -64,19 +64,19 @@ element {
         }
 
         .end {
-    position: relative;
-    left: 0%;
-    width: 1455px;
-    height: 80px;
-    margin: 0;
-    margin-top: 120px; 
-    background-color: #e6ccb3;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: translateY(50px)
-    translateX(-10px);
+            position: relative;
+            left: 0%;
+            width: 1550px;
+            height: 80px;
+            margin: 0;
+            margin-top: 100px; 
+            background-color: #e6ccb3;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(50px)
+            translateX(-10px);
         }
         
         .paragraph2 {
