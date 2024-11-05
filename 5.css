@@ -20,56 +20,56 @@
     font-size: 30px;
     text-align: left;
     margin-left: 5px;
-    position: relative; /* Set relative positioning */
-    top: 150px; /* Optional, adjust as needed */
+    position: relative; 
+    top: 150px;
     align-items: left;
 }
 
 .background-image {
-    position: fixed; /* Fix it to cover the entire viewport */
+    position: fixed; 
     top: 0;
-    left: 0; /* Set to 0 to align with the left edge */
-    width: 100vw; /* Full viewport width */
-    height: 100vh; /* Full viewport height */
-    z-index: -1; /* Places it behind other content */
-    background-image: url("Paintings1.jpg"); /* Add your image path */
-    background-size: cover; /* Ensures the image covers the whole area */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents tiling */
+    left: 0; 
+    width: 100vw; 
+    height: 100vh; 
+    z-index: -1; 
+    background-image: url("Paintings1.jpg"); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
 }
 
 
-  /* Navigation Bar Container */
+ 
 .navbar {
-    position: absolute; /* Position the navbar absolutely */
-    top: 0; /* Align it to the top of the page */
-    width: 100%; /* Make it span the full width of the page */
-    z-index: 1000; /* Ensure it appears above other elements */
-    display: flex; /* Use flexbox for layout */
-    justify-content: flex-start; /* Align items to the left */
+    position: absolute; 
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-start;
 
 }
 
-/* Navigation Links */
+
 .navbar a {
-    float: left; /* Aligns links to the left */
-    display: block; /* Makes the links block elements */
-    color: #000000; /* Sets the text color */
-    text-align: center; /* Centers the text within the links */
-    padding: 14px 16px; /* Adds padding around the links */
-    text-decoration: none; /* Removes underline from links */
-    border: 1px solid rgb(0, 0, 0); /* Adds a 1px solid border around the links */
-    border-radius: 7px; /* Rounds the corners of the border */
+    float: left; 
+    display: block; 
+    color: #000000; 
+    text-align: center; 
+    padding: 14px 16px;
+    text-decoration: none; 
+    border: 1px solid rgb(0, 0, 0); 
+    border-radius: 7px; 
     margin-right: 20px;
     font-family: playfair display;
     margin-top: 5px;
     margin-left: 7px;
 }
 
-/* Navigation Links Hover Effect */
+
 .navbar a:hover {
-    background-color: rgba(206, 206, 206, 0.5); /* Changes background color to semi-transparent light blue on hover */
-    color: rgba(255, 255, 255, 0.8); /* Changes text color to semi-transparent off-white on hover */
+    background-color: rgba(206, 206, 206, 0.5); 
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: underline;
 }
 
@@ -78,16 +78,15 @@
 }
   
   
-/* Container for blocks in grid */
 .container {
-    margin-top: 160px; /* Reduce the space above the container */
-    display: grid; /* Use grid layout */
-    grid-template-columns: repeat(2, 1fr); /* Create 4 columns of equal width */
-    grid-template-rows: repeat(2, 1fr); /* Create 2 rows of equal height */
-    gap: 20px; /* Add some space between the blocks */
-    justify-items: center; /* Center items horizontally */
-    padding-bottom: 20px; /* Add padding below the grid */
-    padding-right: 7px; /* Add padding around the grid */
+    margin-top: 160px; 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: repeat(2, 1fr); 
+    gap: 20px; 
+    justify-items: center; 
+    padding-bottom: 20px; 
+    padding-right: 7px; 
     margin-bottom: 0px;
 }
 
@@ -169,7 +168,7 @@
     width: 100%;
     height: 75px;
     margin: 0;
-    margin-top: 370px; /* Add space above footer */
+    margin-top: 370px;
     background-color: #3D5F68;
     text-align: center;
     display: flex;
