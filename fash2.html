@@ -1,152 +1,140 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+<link href="https://fonts.googleapis.com/css2?family=Gentium+Basic:wght@400;700&display=swap" rel="stylesheet">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classic Style</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
-    <link href="https://fonts.googleapis.com/css2?family=Gentium+Basic:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Make the body a flex container and use full viewport height */
-        body {
-            display: flex;
-            flex-direction: column;  /* Stack elements vertically */
-            height: 100vh;           /* Full height of the viewport */
-            margin: 0;               /* Remove default margin */
-            background-image: url('Last.jpg');
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        /* Wrapper for all content, grows to fill space */
-        .content {
-            flex-grow: 1;            /* Let this section take up remaining space */
-            display: flex;           /* Make the content area a flex container */
-            flex-direction: column;  /* Stack items inside it vertically */
-            align-items: center;     /* Center content horizontally */
-            justify-content: flex-start; /* Start aligning from the top */
-        }
-
-        /* Navbar at the top */
-        .navbar {
-            position: relative;  /* Make navbar stay at the top */
-            z-index: 1000;
-            display: flex;
-            justify-content: flex-start;
-            width: 100%;
-        }
-
-        .navbar a {
-            display: block;
-            color: #000000;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            border: 1px solid rgb(0, 0, 0);
-            border-radius: 7px;
-            margin-right: 20px;
-            font-family: playfair display;
-            margin-top: 5px;
-            margin-left: 7px;
-        }
-
-        /* Header style */
-        header {
-            font-family: 'Sofia', sans-serif;
-            display: flex;
-            justify-content: center;
-            margin: 0;
-            font-size: 50px;
-            color: rgb(0, 0, 0);
-            font-style: italic;
-            transform: translateY(100px);
-            position: relative;
-            top: -90px;
-            text-shadow: -2px -2px 0 rgb(255, 255, 255), 2px -2px 0 white, -2px 2px 0 white, 2px 2px 0 white;
-        }
-
-        /* Image styles */
-        .main {
-            border: 4px solid;
-            border-color: white;
-            border-radius: 8px;
-            position: relative;
-            top: 20px;
-            left: 100px;
-            width: 300px;
-            height: 400px;
-        }
-
-        .CLA1 {
-            position: relative;
-            top: 200px;
-            left: 400px;
-            width: 300px;
-            height: 300px;
-            border: 1px solid;
-            border-radius: 8px;
-            border-color: blanchedalmond;
-        }
-
-        .CLA2 {
-            position: relative;
-            top: 150px;
-            left: 350px;
-            width: 250px;
-            height: 300px;
-            border: 1px solid;
-            border-radius: 8px;
-            border-color: blanchedalmond;
-        }
-
-        /* Paragraph text style */
-        p {
-            font-family: 'Gentium Basic', serif;
-            font-size: 18px;
-            text-align: center;
-            position: relative;
-            top: -300px;
-            left: 200px;
-        }
-
-        /* Footer section style */
-        .end {
-            width: 100%;
-            height: 75px;
-            background-color: #e6ccb3;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: auto; /* Push footer to the bottom */
-        }
-    </style>
 </head>
-<body>
+
+<body style="background-image: url('Last.jpg'); background-repeat: no-repeat; background-size: cover;">
 
     <div class="navbar">
         <a href="index.html">Home</a>
         <a href="About.html" class="rt">About</a>
     </div>
 
-    <!-- Content wrapper that grows to fill space -->
-    <div class="content">
-        <header>Classic Style</header>
+    <header>Classic Style</header>
 
-        <img src="CLM.jfif" class="main">
-        <img src="CLA1.jfif" class="CLA1">
-        <img src="CLA2.jfif" class="CLA2">
+<img src="CLM.jfif" class="main">
+<img src="CLA1.jfif" class="CLA1">
+<img src="CLA2.jfif" class="CLA2">
 
-        <p><strong>Clean silhouettes, tailored cuts, neat hems, neutral colors, simple stripes or minimal detailing, <br>
-            these are all characteristics to help define classic style. Excellent tailoring is essential when <br>
-            it comes to the detail that grabs the eye in classic style. Paired down jewelry. Simplicity. Smart, <br>
-            structured fabric. Exquisite quality. And perhaps a splash of red lipstick, to name just a few.</strong> </p>
-    </div>
+<p><strong>Clean silhouettes, tailored cuts, neat hems, neutral colors, simple stripes or minimal detailing, <br>
+    these are all charactaristic to help define classic styel. Excellent tailoring is essential when <br>
+    it comes to the detail that grabs the eye in classic style. Paired down jewelry. Simplicity. Smart, <br>
+    structured fabric. Exquisite quality. And perhaps a splash of red lipstick, to name just a few.</strong> </p>
 
-    <!-- Footer -->
-    <div class="end">
-        Copyright© 2024 Nile University. <br>Made BY ECE Students under the supervision of ENG: Heba Ali
-    </div>
+
+    
+<div class="end">
+    Copyright© 2024 Nile University. <br>Made BY ECE Students under the supervision of ENG: Heba Ali
+</div>
+
+<style>
+    header {
+        font-family: 'Sofia', sans-serif;
+        display: flex;                   
+        justify-content: center;         
+        margin: 0;                    
+        font-size: 50px;
+        color: rgb(0, 0, 0);
+        font-style: italic;
+        transform: translateY(100px);
+        position: relative;
+        top:-90px;
+        text-shadow: 
+    -2px -2px 0 rgb(255, 255, 255),  
+     2px -2px 0 white,
+    -2px  2px 0 white,
+     2px  2px 0 white; 
+    }
+
+    .main {
+
+        border: 4px solid;
+        border-color: white;
+        border-radius: 8px;
+        position: relative;
+        top:20px;
+        left:100px;
+        width:300px;
+        height:400px
+    }
+
+    .CLA1 {
+        position:relative;
+        top:200px;
+        left:400px;
+        width:300px;
+        height:300px;
+        border: 1px solid;
+        border-radius:8px;
+        border-color: blanchedalmond;
+    }
+
+
+    .CLA2 {
+        position:relative;
+        top:150px;
+        left:350px;
+        width:250px;
+        height:300px;
+        border: 1px solid;
+        border-radius:8px;
+        border-color: blanchedalmond;
+    }
+
+    p {
+        font-family: 'Gentium Basic', serif;
+        font-size: 18px;
+        align-items: center;
+        text-align: center;
+        align-content: center;
+        position: relative;
+        top:-300px;
+        left:200px;
+    }
+
+    .navbar {
+    position: absolute; 
+    top: 0; 
+    width: 100%;
+    z-index: 1000; 
+    display: flex; 
+    justify-content: flex-start;
+}
+.navbar a {
+    float: left; 
+    display: block;
+    color: #000000; 
+    text-align: center; 
+    padding: 14px 16px; 
+    text-decoration: none; 
+    border: 1px solid rgb(0, 0, 0); 
+    border-radius: 7px; 
+    margin-right: 20px;
+    font-family: playfair display;
+    margin-top: 5px;
+    margin-left: 7px;
+}
+
+.end {
+    position: relative;
+    left: 0%;
+    width: 1455px;
+    height: 80px;
+    margin: 0;
+    margin-top: 120px; 
+    background-color: #e6ccb3;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(50px)
+    translateX(-10px);
+}
+</style>
 
 </body>
+
 </html>
