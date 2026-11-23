@@ -1,0 +1,2393 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YASEN // SEC — Software Engineer & Security Researcher</title>
+  
+  <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0B0908',
+            ash: '#161311',
+            ashLight: '#1E1A17',
+            char: '#29221E',
+            whiteAsh: '#F3EFEA',
+            soot: '#8C827A',
+            ember: '#FF4D00',
+            moltenGold: '#FFB800',
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            sans: ['"Inter"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          boxShadow: {
+            'ember-sm': '0 0 18px -4px rgba(255, 77, 0, 0.35)',
+            'ember-md': '0 8px 32px -6px rgba(255, 77, 0, 0.28), inset 0 1px 0 0 rgba(255, 184, 0, 0.25)',
+            'ember-btn': '0 4px 24px -2px rgba(255, 77, 0, 0.45), inset 0 1px 1px rgba(255, 220, 130, 0.5)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --bg-obsidian: #0B0908;
+      --bg-ash: #161311;
+      --border-char: #29221E;
+      --text-ash: #F3EFEA;
+      --text-soot: #8C827A;
+      --ember-core: #FF4D00;
+      --ember-glow: #FFB800;
+    }
+
+    body {
+      background-color: var(--bg-obsidian);
+      color: var(--text-ash);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      selection-background-color: #FF4D00;
+    }
+
+    ::selection {
+      background: rgba(255, 77, 0, 0.35);
+      color: #F3EFEA;
+    }
+
+    /* Fixed SVG Fractal Noise / Volcanic Soot Grain Overlay */
+    .ash-grain-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 50;
+      opacity: 0.038;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Ambient Off-Screen Magma Glows */
+    .hero-magma-top {
+      background: radial-gradient(ellipse 70% 45% at 50% -12%, rgba(255, 77, 0, 0.16) 0%, rgba(255, 184, 0, 0.04) 45%, transparent 75%);
+    }
+
+    .hero-magma-bottom {
+      background: radial-gradient(ellipse 80% 35% at 50% 108%, rgba(255, 77, 0, 0.13) 0%, transparent 70%);
+    }
+
+    @keyframes hearthBreathe {
+      0%, 100% {
+        opacity: 0.72;
+        transform: scaleY(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scaleY(1.08);
+      }
+    }
+
+    .hearth-bed-glow {
+      background: radial-gradient(ellipse 90% 100% at 50% 100%, rgba(255, 77, 0, 0.24) 0%, rgba(255, 184, 0, 0.08) 38%, rgba(158, 27, 0, 0.03) 65%, transparent 85%);
+      transform-origin: bottom center;
+      animation: hearthBreathe 5.5s ease-in-out infinite;
+    }
+
+    /* Molten Gradient Text */
+    .text-molten {
+      background: linear-gradient(135deg, #FFB800 0%, #FF4D00 60%, #D93800 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Mouse-Tracking Radial Spotlight Project Cards */
+    .ember-card {
+      position: relative;
+      background-color: #161311;
+      border: 1px solid #29221E;
+      transition: border-color 0.3s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+
+    .ember-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        480px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 77, 0, 0.13),
+        rgba(255, 184, 0, 0.03) 40%,
+        transparent 75%
+      );
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .ember-card:hover::before {
+      opacity: 1;
+    }
+
+    .ember-card:hover {
+      border-color: #FF4D00;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 34px -8px rgba(255, 77, 0, 0.25), inset 0 1px 0 0 rgba(255, 184, 0, 0.25);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0B0908;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #29221E;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #FF4D00;
+    }
+
+    /* Subtle pulse for status beacon */
+    @keyframes emberPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 77, 0, 0.7);
+      }
+      50% {
+        box-shadow: 0 0 0 6px rgba(255, 77, 0, 0);
+      }
+    }
+    .beacon-pulse {
+      animation: emberPulse 2.4s infinite;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-ember/30 selection:text-whiteAsh">
+
+  <!-- Fixed Volcanic Ash Grain Texture -->
+  <div class="ash-grain-overlay" aria-hidden="true"></div>
+
+  <!-- Minimalist Sticky Navigation -->
+  <header class="fixed top-0 inset-x-0 z-40 bg-obsidian/80 backdrop-blur-md border-b border-char/80">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+      <!-- Monogram Logo -->
+      <a href="#top" class="group flex items-center gap-2.5 focus:outline-none">
+        <span class="w-2.5 h-2.5 rounded-sm bg-gradient-to-tr from-ember to-moltenGold rotate-45 group-hover:rotate-90 transition-transform duration-300 shadow-ember-sm"></span>
+        <span class="font-mono text-sm sm:text-base font-semibold tracking-wider text-whiteAsh">
+          YASEN <span class="text-ember">//</span> SEC
+        </span>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 font-mono text-xs tracking-wide text-soot">
+        <a href="#projects" class="hover:text-whiteAsh transition-colors">01. REPOSITORIES</a>
+        <a href="#arsenal" class="hover:text-whiteAsh transition-colors">02. ARSENAL</a>
+        <a href="#terminal" class="hover:text-whiteAsh transition-colors">03. SHELL</a>
+      </nav>
+
+      <!-- Particle Intensity & Wind Controls + GitHub CTA -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Intensity Switcher -->
+        <div class="hidden sm:flex items-center bg-ash border border-char rounded-lg p-0.5 font-mono text-[11px]" role="group" aria-label="Particle Intensity">
+          <button data-intensity="smolder" class="intensity-btn px-2 py-1 rounded-md text-soot hover:text-whiteAsh transition-colors">Smolder</button>
+          <button data-intensity="blaze" class="intensity-btn px-2 py-1 rounded-md bg-char text-moltenGold font-medium transition-colors">Blaze</button>
+          <button data-intensity="inferno" class="intensity-btn px-2 py-1 rounded-md text-soot hover:text-whiteAsh transition-colors">Inferno</button>
+          <button data-intensity="off" class="intensity-btn px-2 py-1 rounded-md text-soot hover:text-whiteAsh transition-colors">Off</button>
+        </div>
+
+        <!-- Wind Toggle -->
+        <button id="windToggleBtn" class="hidden lg:inline-flex items-center px-2.5 py-1.5 rounded-lg bg-ash hover:bg-ashLight border border-char hover:border-ember/60 font-mono text-[11px] text-soot transition-colors">
+          Wind: Auto
+        </button>
+
+        <!-- Mobile Wind Toggle -->
+        <button data-wind-mobile class="lg:hidden inline-flex items-center px-2.5 py-1.5 rounded-lg bg-ash border border-char font-mono text-[11px] text-soot">
+          Wind
+        </button>
+
+        <!-- GitHub Link -->
+        <a href="https://github.com/YasenK90" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-ash hover:bg-ashLight border border-char hover:border-ember font-mono text-xs text-whiteAsh transition-all">
+          <span>@YasenK90</span>
+          <span class="text-ember">&nearr;</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Full-Viewport Volumetric Combustion Canvas -->
+  <section id="top" class="relative min-h-screen flex items-center pt-16 overflow-hidden border-b border-char hero-magma-top">
+    <!-- Interactive HTML5 Particle Canvas -->
+    <canvas id="emberCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- Bottom Ambient Hearth Glow -->
+    <div class="absolute inset-x-0 bottom-0 h-56 pointer-events-none z-0 hearth-bed-glow"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 pointer-events-none z-0 hero-magma-bottom"></div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-28 w-full">
+      <div class="max-w-3xl">
+        <!-- Status Beacon Pill -->
+        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-ash/90 border border-char mb-7 backdrop-blur-sm">
+          <span class="w-2 h-2 rounded-full bg-ember beacon-pulse"></span>
+          <span class="font-mono text-xs text-whiteAsh/90 tracking-wide">
+            SYSTEMS ENGINEER &amp; OFFENSIVE SECURITY RESEARCHER
+          </span>
+        </div>
+
+        <!-- Display Headline -->
+        <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-whiteAsh leading-[1.06] mb-6">
+          Forging Resilient Systems.<br />
+          <span class="text-molten">Stress-Testing Every Layer.</span>
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="text-base sm:text-lg text-soot leading-relaxed max-w-2xl mb-9">
+          I&rsquo;m <span class="text-whiteAsh font-medium">Yasen Khaled</span> (<span class="font-mono text-sm text-moltenGold">@YasenK90</span>) &mdash; building multi-tenant security SaaS platforms, real-time telemetry monitors, and offensive auditing tools engineered to survive hostile environments.
+        </p>
+
+        <!-- Primary & Secondary CTAs -->
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="#projects" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-ember to-[#FF6A00] text-whiteAsh font-mono text-xs sm:text-sm font-semibold tracking-wide shadow-ember-btn hover:brightness-110 transition-all">
+            <span>EXPLORE REPOSITORIES</span>
+            <span>&darr;</span>
+          </a>
+          <a href="#terminal" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-ash/90 hover:bg-ashLight border border-char hover:border-ember text-whiteAsh font-mono text-xs sm:text-sm transition-all">
+            <span class="text-ember">&gt;_</span>
+            <span>OPEN SHELL</span>
+          </a>
+        </div>
+
+        <!-- Interactive Canvas Hint -->
+        <p class="mt-8 font-mono text-[11px] text-soot/75">
+          [TIP] Sweep cursor to stir thermal eddies &bull; Click or hold anywhere in the dark ash to ignite sparks.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured GitHub Repositories Section -->
+  <section id="projects" class="relative py-24 sm:py-28 border-b border-char">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+        <div>
+          <span class="font-mono text-xs text-ember tracking-widest uppercase block mb-2">// 01. FEATURED REPOSITORIES</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-whiteAsh">
+            Forged in Production &amp; Research
+          </h2>
+        </div>
+        <a href="https://github.com/YasenK90?tab=repositories" target="_blank" rel="noreferrer" class="font-mono text-xs text-soot hover:text-moltenGold transition-colors">
+          github.com/YasenK90 (24 repos) &nearr;
+        </a>
+      </div>
+
+      <!-- 6-Repository 2x3 Responsive Spotlight Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Card 1: defacement-monitor -->
+        <article data-project="defacement-monitor" class="ember-card rounded-xl p-6 sm:p-7 flex flex-col justify-between cursor-pointer group">
+          <div class="relative z-10">
+            <div class="flex items-center justify-between gap-2 mb-5">
+              <span class="font-mono text-xs text-soot">REPO // 01</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-obsidian border border-char font-mono text-[10px] text-moltenGold">
+                <span class="w-1.5 h-1.5 rounded-full bg-moltenGold animate-pulse"></span>
+                SECURITY SAAS &bull; NODE.JS / REDIS
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <h3 class="font-display text-2xl font-bold text-whiteAsh group-hover:text-moltenGold transition-colors">
+                Sentinel
+              </h3>
+              <span data-repo-meta="defacement-monitor" class="font-mono text-[11px] text-soot"></span>
+            </div>
+            <div class="font-mono text-[11px] text-ember/90 mb-3">YasenK90/defacement-monitor</div>
+            <p data-repo-desc="defacement-monitor" class="text-sm text-soot leading-relaxed mb-6">
+              White-labeled website defacement and uptime monitoring platform built for agencies with visual DOM hashing, automated health probes, and instant alerts.
+            </p>
+          </div>
+
+          <div class="relative z-10 pt-5 border-t border-char/80">
+            <div data-repo-tags="defacement-monitor" class="flex flex-wrap gap-1.5 mb-4">
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">Node.js</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">React</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">Supabase</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">Redis</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">Tailwind</span>
+            </div>
+            <div class="flex items-center justify-between font-mono text-xs text-ember">
+              <span class="group-hover:translate-x-1 transition-transform">Inspect Architecture &rarr;</span>
+              <a href="https://github.com/YasenK90/defacement-monitor" target="_blank" rel="noreferrer" onclick="event.stopPropagation()" class="text-soot hover:text-whiteAsh underline decoration-char hover:decoration-ember transition-colors">
+                GitHub &nearr;
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2: obsidian-security -->
+        <article data-project="obsidian-security" class="ember-card rounded-xl p-6 sm:p-7 flex flex-col justify-between cursor-pointer group">
+          <div class="relative z-10">
+            <div class="flex items-center justify-between gap-2 mb-5">
+              <span class="font-mono text-xs text-soot">REPO // 02</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-obsidian border border-char font-mono text-[10px] text-ember">
+                OFFENSIVE SECURITY &bull; AUDITING
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <h3 class="font-display text-2xl font-bold text-whiteAsh group-hover:text-moltenGold transition-colors">
+                Obsidian Security
+              </h3>
+              <span data-repo-meta="obsidian-security" class="font-mono text-[11px] text-soot"></span>
+            </div>
+            <div class="font-mono text-[11px] text-ember/90 mb-3">YasenK90/obsidian-security</div>
+            <p data-repo-desc="obsidian-security" class="text-sm text-soot leading-relaxed mb-6">
+              Security research toolkit, vulnerability assessment workflows, and defensive hardening utilities built for web and API attack surfaces.
+            </p>
+          </div>
+
+          <div class="relative z-10 pt-5 border-t border-char/80">
+            <div data-repo-tags="obsidian-security" class="flex flex-wrap gap-1.5 mb-4">
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">Python</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">Bash</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">HTTP/API</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">SecOps</span>
+            </div>
+            <div class="flex items-center justify-between font-mono text-xs text-ember">
+              <span class="group-hover:translate-x-1 transition-transform">Inspect Architecture &rarr;</span>
+              <a href="https://github.com/YasenK90/obsidian-security" target="_blank" rel="noreferrer" onclick="event.stopPropagation()" class="text-soot hover:text-whiteAsh underline decoration-char hover:decoration-ember transition-colors">
+                GitHub &nearr;
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3: sol-monitor -->
+        <article data-project="sol-monitor" class="ember-card rounded-xl p-6 sm:p-7 flex flex-col justify-between cursor-pointer group">
+          <div class="relative z-10">
+            <div class="flex items-center justify-between gap-2 mb-5">
+              <span class="font-mono text-xs text-soot">REPO // 03</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-obsidian border border-char font-mono text-[10px] text-moltenGold">
+                AI AUTOMATION &bull; LEAD GEN
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <h3 class="font-display text-2xl font-bold text-whiteAsh group-hover:text-moltenGold transition-colors">
+                Sol Monitor
+              </h3>
+              <span data-repo-meta="sol-monitor" class="font-mono text-[11px] text-soot"></span>
+            </div>
+            <div class="font-mono text-[11px] text-ember/90 mb-3">YasenK90/sol-monitor</div>
+            <p data-repo-desc="sol-monitor" class="text-sm text-soot leading-relaxed mb-6">
+              AI-powered lead generation and intent monitoring system that discovers, qualifies, and enriches high-value prospects automatically.
+            </p>
+          </div>
+
+          <div class="relative z-10 pt-5 border-t border-char/80">
+            <div data-repo-tags="sol-monitor" class="flex flex-wrap gap-1.5 mb-4">
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">TypeScript</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">LLM Agents</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">Web Scraping</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">Node.js</span>
+            </div>
+            <div class="flex items-center justify-between font-mono text-xs text-ember">
+              <span class="group-hover:translate-x-1 transition-transform">Inspect Architecture &rarr;</span>
+              <a href="https://github.com/YasenK90/sol-monitor" target="_blank" rel="noreferrer" onclick="event.stopPropagation()" class="text-soot hover:text-whiteAsh underline decoration-char hover:decoration-ember transition-colors">
+                GitHub &nearr;
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 4: offscript-academy -->
+        <article data-project="offscript-academy" class="ember-card rounded-xl p-6 sm:p-7 flex flex-col justify-between cursor-pointer group">
+          <div class="relative z-10">
+            <div class="flex items-center justify-between gap-2 mb-5">
+              <span class="font-mono text-xs text-soot">REPO // 04</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-obsidian border border-char font-mono text-[10px] text-whiteAsh/90">
+                EDTECH PLATFORM &bull; FULL-STACK
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <h3 class="font-display text-2xl font-bold text-whiteAsh group-hover:text-moltenGold transition-colors">
+                Offscript Academy
+              </h3>
+              <span data-repo-meta="offscript-academy" class="font-mono text-[11px] text-soot"></span>
+            </div>
+            <div class="font-mono text-[11px] text-ember/90 mb-3">YasenK90/offscript-academy</div>
+            <p data-repo-desc="offscript-academy" class="text-sm text-soot leading-relaxed mb-6">
+              Interactive learning platform and curriculum hub built for hands-on technical education, structured tracks, and progress tracking.
+            </p>
+          </div>
+
+          <div class="relative z-10 pt-5 border-t border-char/80">
+            <div data-repo-tags="offscript-academy" class="flex flex-wrap gap-1.5 mb-4">
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">React</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">TypeScript</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">Tailwind CSS</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">Full-Stack</span>
+            </div>
+            <div class="flex items-center justify-between font-mono text-xs text-ember">
+              <span class="group-hover:translate-x-1 transition-transform">Inspect Architecture &rarr;</span>
+              <a href="https://github.com/YasenK90/offscript-academy" target="_blank" rel="noreferrer" onclick="event.stopPropagation()" class="text-soot hover:text-whiteAsh underline decoration-char hover:decoration-ember transition-colors">
+                GitHub &nearr;
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 5: northstar-travel -->
+        <article data-project="northstar-travel" class="ember-card rounded-xl p-6 sm:p-7 flex flex-col justify-between cursor-pointer group">
+          <div class="relative z-10">
+            <div class="flex items-center justify-between gap-2 mb-5">
+              <span class="font-mono text-xs text-soot">REPO // 05</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-obsidian border border-char font-mono text-[10px] text-whiteAsh/90">
+                WEB APPLICATION &bull; BOOKING &amp; UI
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <h3 class="font-display text-2xl font-bold text-whiteAsh group-hover:text-moltenGold transition-colors">
+                Northstar Travel
+              </h3>
+              <span data-repo-meta="northstar-travel" class="font-mono text-[11px] text-soot"></span>
+            </div>
+            <div class="font-mono text-[11px] text-ember/90 mb-3">YasenK90/northstar-travel</div>
+            <p data-repo-desc="northstar-travel" class="text-sm text-soot leading-relaxed mb-6">
+              Modern travel discovery and itinerary showcase platform featuring curated destinations, responsive layouts, and seamless trip planning UX.
+            </p>
+          </div>
+
+          <div class="relative z-10 pt-5 border-t border-char/80">
+            <div data-repo-tags="northstar-travel" class="flex flex-wrap gap-1.5 mb-4">
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">JavaScript</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">HTML5</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">CSS3</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">UI/UX</span>
+            </div>
+            <div class="flex items-center justify-between font-mono text-xs text-ember">
+              <span class="group-hover:translate-x-1 transition-transform">Inspect Architecture &rarr;</span>
+              <a href="https://github.com/YasenK90/northstar-travel" target="_blank" rel="noreferrer" onclick="event.stopPropagation()" class="text-soot hover:text-whiteAsh underline decoration-char hover:decoration-ember transition-colors">
+                GitHub &nearr;
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 6: afterlater -->
+        <article data-project="afterlater" class="ember-card rounded-xl p-6 sm:p-7 flex flex-col justify-between cursor-pointer group">
+          <div class="relative z-10">
+            <div class="flex items-center justify-between gap-2 mb-5">
+              <span class="font-mono text-xs text-soot">REPO // 06</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-obsidian border border-char font-mono text-[10px] text-whiteAsh/90">
+                PRODUCTIVITY &bull; WEB APP
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <h3 class="font-display text-2xl font-bold text-whiteAsh group-hover:text-moltenGold transition-colors">
+                Afterlater
+              </h3>
+              <span data-repo-meta="afterlater" class="font-mono text-[11px] text-soot"></span>
+            </div>
+            <div class="font-mono text-[11px] text-ember/90 mb-3">YasenK90/afterlater</div>
+            <p data-repo-desc="afterlater" class="text-sm text-soot leading-relaxed mb-6">
+              Minimalist task deferral, time-capsule, and asynchronous scheduling web application designed to clear mental clutter without notification noise.
+            </p>
+          </div>
+
+          <div class="relative z-10 pt-5 border-t border-char/80">
+            <div data-repo-tags="afterlater" class="flex flex-wrap gap-1.5 mb-4">
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">TypeScript</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">React</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">Local-First</span>
+              <span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">UI</span>
+            </div>
+            <div class="flex items-center justify-between font-mono text-xs text-ember">
+              <span class="group-hover:translate-x-1 transition-transform">Inspect Architecture &rarr;</span>
+              <a href="https://github.com/YasenK90/afterlater" target="_blank" rel="noreferrer" onclick="event.stopPropagation()" class="text-soot hover:text-whiteAsh underline decoration-char hover:decoration-ember transition-colors">
+                GitHub &nearr;
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Arsenal / Focus Matrix -->
+  <section id="arsenal" class="relative py-24 sm:py-28 border-b border-char">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      <div class="mb-14">
+        <span class="font-mono text-xs text-ember tracking-widest uppercase block mb-2">// 02. TECHNICAL ARSENAL</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-whiteAsh">
+          Dual-Discipline Focus Matrix
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Column 1: Offensive Security -->
+        <div class="rounded-xl bg-ash border border-char p-6 sm:p-8 relative overflow-hidden">
+          <div class="flex items-center justify-between pb-4 mb-6 border-b border-char">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-sm bg-ember"></span>
+              <h3 class="font-mono text-sm sm:text-base font-semibold text-whiteAsh uppercase tracking-wider">
+                AppSec &amp; Bug Bounty Research
+              </h3>
+            </div>
+            <span class="font-mono text-xs text-soot">[OFFENSIVE]</span>
+          </div>
+
+          <ul class="space-y-4 font-mono text-xs sm:text-sm">
+            <li class="flex items-start gap-3">
+              <span class="text-ember mt-0.5">&gt;</span>
+              <div>
+                <span class="text-whiteAsh font-medium">Web &amp; API Attack Surfaces</span>
+                <p class="text-soot text-xs font-sans mt-1 leading-relaxed">
+                  IDORs, OAuth/JWT misconfigurations, SSRF, race conditions, GraphQL introspection exploits, and multi-tenant authorization bypasses.
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-ember mt-0.5">&gt;</span>
+              <div>
+                <span class="text-whiteAsh font-medium">Custom Burp Suite &amp; Recon Tooling</span>
+                <p class="text-soot text-xs font-sans mt-1 leading-relaxed">
+                  Automated subdomain enumeration pipelines, headless JS endpoint extraction, and custom Montoya API extensions for traffic mutation.
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-ember mt-0.5">&gt;</span>
+              <div>
+                <span class="text-whiteAsh font-medium">Smart Contract &amp; Web3 Auditing</span>
+                <p class="text-soot text-xs font-sans mt-1 leading-relaxed">
+                  Invariant fuzzing with Foundry, reentrancy &amp; flash-loan vector analysis, signature replay checks, and EVM bytecode disassembly.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 2: Systems & Full-Stack Engineering -->
+        <div class="rounded-xl bg-ash border border-char p-6 sm:p-8 relative overflow-hidden">
+          <div class="flex items-center justify-between pb-4 mb-6 border-b border-char">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-sm bg-moltenGold"></span>
+              <h3 class="font-mono text-sm sm:text-base font-semibold text-whiteAsh uppercase tracking-wider">
+                Systems &amp; Full-Stack Engineering
+              </h3>
+            </div>
+            <span class="font-mono text-xs text-soot">[BUILDER]</span>
+          </div>
+
+          <ul class="space-y-4 font-mono text-xs sm:text-sm">
+            <li class="flex items-start gap-3">
+              <span class="text-moltenGold mt-0.5">&gt;</span>
+              <div>
+                <span class="text-whiteAsh font-medium">Distributed Proxies &amp; Backend Runtime</span>
+                <p class="text-soot text-xs font-sans mt-1 leading-relaxed">
+                  Low-latency Node.js, TypeScript, and Go microservices engineered for fault tolerance, connection pooling, and sub-millisecond routing.
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-moltenGold mt-0.5">&gt;</span>
+              <div>
+                <span class="text-whiteAsh font-medium">Linux / Arch Internals &amp; Hardening</span>
+                <p class="text-soot text-xs font-sans mt-1 leading-relaxed">
+                  Kernel parameter tuning, eBPF observability, strict systemd sandboxing, container isolation, and zero-trust network segmentation.
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-moltenGold mt-0.5">&gt;</span>
+              <div>
+                <span class="text-whiteAsh font-medium">Data Layer &amp; Real-Time Telemetry</span>
+                <p class="text-soot text-xs font-sans mt-1 leading-relaxed">
+                  PostgreSQL row-level security (RLS), Redis streams &amp; Lua rate-limiters, WebSockets, and responsive React control planes.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Terminal / Contact Footer -->
+  <footer id="terminal" class="relative py-20 sm:py-24 bg-obsidian">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8">
+      <div class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <span class="font-mono text-xs text-ember tracking-widest uppercase block mb-1.5">// 03. DIRECT SHELL &amp; CONTACT</span>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-whiteAsh">Initialize Connection</h2>
+        </div>
+
+        <!-- Quick Copy Email Button -->
+        <button id="copyEmailBtn" class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-lg bg-ash hover:bg-ashLight border border-char hover:border-ember transition-all font-mono text-xs text-whiteAsh self-start sm:self-auto">
+          <svg class="w-4 h-4 text-ember" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span id="copyEmailText">yasen@sec-forge.dev</span>
+        </button>
+      </div>
+
+      <!-- Interactive Charred Terminal Box -->
+      <div class="rounded-xl bg-ash border border-char overflow-hidden shadow-2xl">
+        <!-- Terminal Window Header -->
+        <div class="px-4 py-3 bg-[#110E0D] border-b border-char flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-ember/80"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-moltenGold/60"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-char"></span>
+            <span class="font-mono text-[11px] text-soot ml-2">yasen@obsidian:~ (zsh)</span>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <button data-cmd="whoami" class="quick-cmd px-2 py-0.5 rounded bg-obsidian hover:border-ember border border-char font-mono text-[10px] text-soot hover:text-whiteAsh transition-colors">whoami</button>
+            <button data-cmd="projects" class="quick-cmd px-2 py-0.5 rounded bg-obsidian hover:border-ember border border-char font-mono text-[10px] text-soot hover:text-whiteAsh transition-colors">projects</button>
+            <button data-cmd="skills" class="quick-cmd px-2 py-0.5 rounded bg-obsidian hover:border-ember border border-char font-mono text-[10px] text-soot hover:text-whiteAsh transition-colors">skills</button>
+            <button data-cmd="contact" class="quick-cmd px-2 py-0.5 rounded bg-obsidian hover:border-ember border border-char font-mono text-[10px] text-soot hover:text-whiteAsh transition-colors">contact</button>
+            <button data-cmd="clear" class="quick-cmd px-2 py-0.5 rounded bg-obsidian hover:border-ember border border-char font-mono text-[10px] text-soot hover:text-whiteAsh transition-colors">clear</button>
+          </div>
+        </div>
+
+        <!-- Terminal Output Stream -->
+        <div id="terminalOutput" class="p-5 font-mono text-xs sm:text-sm space-y-2.5 max-h-64 overflow-y-auto text-whiteAsh/90">
+          <div class="text-soot">Welcome to YASEN // SEC interactive shell. Type <span class="text-moltenGold">help</span> or click a command chip above.</div>
+        </div>
+
+        <!-- Terminal Input Form -->
+        <form id="terminalForm" class="px-5 py-3.5 bg-[#120F0E] border-t border-char flex items-center gap-2.5">
+          <span class="font-mono text-xs sm:text-sm text-ember font-semibold select-none">guest@yasen:~$</span>
+          <input 
+            id="terminalInput" 
+            type="text" 
+            autocomplete="off" 
+            spellcheck="false"
+            placeholder="enter command (whoami, projects, skills, contact, clear)..." 
+            class="w-full bg-transparent font-mono text-xs sm:text-sm text-whiteAsh placeholder-soot/50 focus:outline-none"
+          />
+        </form>
+      </div>
+
+      <!-- Bottom Links & Copyright -->
+      <div class="mt-10 pt-6 border-t border-char/60 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-soot">
+        <div>&copy; 2026 YASEN KHALED (@YasenK90). Forged in Obsidian &amp; Ash.</div>
+        <div class="flex items-center gap-6">
+          <a href="https://github.com/YasenK90" target="_blank" rel="noreferrer" class="hover:text-ember transition-colors">GITHUB (@YasenK90)</a>
+          <a href="https://hackerone.com" target="_blank" rel="noreferrer" class="hover:text-ember transition-colors">HACKERONE</a>
+          <a href="https://x.com" target="_blank" rel="noreferrer" class="hover:text-ember transition-colors">X / TWITTER</a>
+          <a href="#top" class="text-moltenGold hover:underline">TOP &uarr;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Ash & Ember Project Architecture Modal Drawer -->
+  <div id="projectModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-obsidian/85 backdrop-blur-md">
+    <div class="relative w-full max-w-2xl rounded-xl bg-ash border border-ember/60 shadow-ember-md overflow-hidden transform transition-all">
+      <!-- Top Glow Accent Line -->
+      <div class="h-1 w-full bg-gradient-to-r from-ember via-moltenGold to-ember"></div>
+      
+      <div class="p-6 sm:p-8">
+        <div class="flex items-start justify-between gap-4 mb-5">
+          <div>
+            <span id="modalCategory" class="font-mono text-xs text-ember uppercase tracking-widest block mb-1">SYS // 01</span>
+            <h3 id="modalTitle" class="font-display text-2xl sm:text-3xl font-bold text-whiteAsh">Project Title</h3>
+          </div>
+          <button id="closeModalBtn" class="p-2 rounded-lg bg-obsidian border border-char text-soot hover:text-whiteAsh hover:border-ember transition-colors" aria-label="Close modal">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <p id="modalSummary" class="text-sm sm:text-base text-soot leading-relaxed mb-6">
+          Detailed overview goes here.
+        </p>
+
+        <!-- Architecture & Key Highlights -->
+        <div class="rounded-lg bg-obsidian border border-char p-4 sm:p-5 mb-6">
+          <div class="font-mono text-xs text-moltenGold uppercase tracking-wider mb-3">
+            // Key Architectural Highlights
+          </div>
+          <ul id="modalHighlights" class="space-y-2.5 font-mono text-xs text-whiteAsh/90">
+            <!-- Populated dynamically -->
+          </ul>
+        </div>
+
+        <!-- Stack Tags & Action -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-char">
+          <div id="modalTags" class="flex flex-wrap gap-1.5">
+            <!-- Populated dynamically -->
+          </div>
+          <div class="flex items-center gap-2.5">
+            <a id="modalRepoLink" href="https://github.com/YasenK90" target="_blank" rel="noreferrer" class="px-4 py-2 rounded-lg bg-obsidian hover:bg-ashLight border border-char hover:border-ember font-mono text-xs text-whiteAsh transition-colors">
+              View on GitHub &nearr;
+            </a>
+            <button id="modalActionBtn" class="px-4 py-2 rounded-lg bg-ember hover:bg-[#FF5E1A] font-mono text-xs font-semibold text-whiteAsh transition-colors">
+              Request Technical Briefing
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Logic: Canvas Embers, Spotlight Cards, Modals & Terminal -->
+  <script>
+    (function () {
+      /* =====================================================================
+         1. VOLUMETRIC COMBUSTION & ASH PARTICLE ENGINE
+         ===================================================================== */
+      const canvas = document.getElementById('emberCanvas');
+      const ctx = canvas.getContext('2d');
+
+      let width = 0;
+      let height = 0;
+      let simTime = 0;
+      let intensity = 'blaze';
+      let windMode = 'auto';
+      let isPaused = false;
+      let trailSpawnAccumulator = 0;
+      let holdJetAccumulator = 0;
+
+      const particles = [];
+      const burstParticles = [];
+      const smokeWisps = [];
+
+      const presetConfig = {
+        smolder: { particles: 42, smoke: 4, sparkRatio: 0.34, cinderRatio: 0.24, bokehRatio: 0.06 },
+        blaze:   { particles: 78, smoke: 6, sparkRatio: 0.44, cinderRatio: 0.24, bokehRatio: 0.08 },
+        inferno: { particles: 125, smoke: 9, sparkRatio: 0.52, cinderRatio: 0.24, bokehRatio: 0.10 }
+      };
+
+      const depthConfig = [
+        { scale: 0.62, speed: 0.65, alpha: 0.55, parallax: 8 },
+        { scale: 0.95, speed: 1.00, alpha: 0.85, parallax: 18 },
+        { scale: 1.32, speed: 1.35, alpha: 1.00, parallax: 32 },
+        { scale: 1.75, speed: 1.55, alpha: 0.32, parallax: 52 }
+      ];
+
+      // Pre-rendered Additive Glow & Optical Bokeh Sprites
+      function createGlowSprite(size, stops) {
+        const off = document.createElement('canvas');
+        off.width = size;
+        off.height = size;
+        const octx = off.getContext('2d');
+        const half = size / 2;
+        const grad = octx.createRadialGradient(half, half, 0, half, half, half);
+        stops.forEach(([pos, col]) => grad.addColorStop(pos, col));
+        octx.fillStyle = grad;
+        octx.fillRect(0, 0, size, size);
+        return off;
+      }
+
+      function createHexBokehSprite(size) {
+        const off = document.createElement('canvas');
+        off.width = size;
+        off.height = size;
+        const octx = off.getContext('2d');
+        const half = size / 2;
+        const r = half * 0.82;
+
+        octx.save();
+        octx.translate(half, half);
+        octx.beginPath();
+        for (let i = 0; i < 6; i++) {
+          const a = (i * Math.PI) / 3;
+          const x = Math.cos(a) * r;
+          const y = Math.sin(a) * r;
+          if (i === 0) octx.moveTo(x, y);
+          else octx.lineTo(x, y);
+        }
+        octx.closePath();
+
+        const grad = octx.createRadialGradient(0, 0, r * 0.15, 0, 0, r);
+        grad.addColorStop(0.0, 'rgba(255, 165, 55, 0.16)');
+        grad.addColorStop(0.72, 'rgba(255, 95, 15, 0.24)');
+        grad.addColorStop(0.92, 'rgba(255, 200, 90, 0.38)');
+        grad.addColorStop(1.0, 'rgba(255, 77, 0, 0)');
+        octx.fillStyle = grad;
+        octx.fill();
+        octx.restore();
+        return off;
+      }
+
+      const spriteBank = {
+        whiteHot: createGlowSprite(64, [
+          [0.0, 'rgba(255, 253, 240, 0.95)'],
+          [0.25, 'rgba(255, 195, 65, 0.55)'],
+          [0.6, 'rgba(255, 77, 0, 0.18)'],
+          [1.0, 'rgba(255, 77, 0, 0)']
+        ]),
+        emberHalo: createGlowSprite(64, [
+          [0.0, 'rgba(255, 155, 45, 0.75)'],
+          [0.35, 'rgba(255, 77, 0, 0.32)'],
+          [0.75, 'rgba(160, 28, 0, 0.08)'],
+          [1.0, 'rgba(160, 28, 0, 0)']
+        ]),
+        cherryHalo: createGlowSprite(64, [
+          [0.0, 'rgba(220, 55, 10, 0.62)'],
+          [0.45, 'rgba(140, 20, 0, 0.24)'],
+          [1.0, 'rgba(100, 10, 0, 0)']
+        ]),
+        smokePuff: createGlowSprite(128, [
+          [0.0, 'rgba(42, 34, 30, 0.22)'],
+          [0.5, 'rgba(26, 21, 19, 0.10)'],
+          [1.0, 'rgba(15, 12, 11, 0)']
+        ]),
+        bokehHex: createHexBokehSprite(96)
+      };
+
+      /**
+       * Pre-Baked Procedural Offscreen Texture Generator for Perforated Ash Flakes:
+       * Builds a 12-16 vertex jagged silhouette with burnt wood-grain striations,
+       * cellular carbon flecks, genuine transparent burn pinholes, and a charred
+       * dark-soot margin behind the active smoldering ember front.
+       */
+      function bakeAshFlakeTexture(vertices, burnStartIdx, burnSpan, baseTone) {
+        const texSize = 96;
+        const half = texSize / 2;
+        const scale = 30;
+        const off = document.createElement('canvas');
+        off.width = texSize;
+        off.height = texSize;
+        const octx = off.getContext('2d');
+
+        octx.save();
+        octx.translate(half, half);
+
+        // 1. Jagged multi-lobed silhouette
+        octx.beginPath();
+        for (let i = 0; i < vertices.length; i++) {
+          const v = vertices[i];
+          if (i === 0) octx.moveTo(v.x * scale, v.y * scale);
+          else octx.lineTo(v.x * scale, v.y * scale);
+        }
+        octx.closePath();
+
+        const grad = octx.createLinearGradient(-scale, -scale * 0.6, scale, scale * 0.6);
+        grad.addColorStop(0, `rgb(${baseTone + 14}, ${baseTone + 10}, ${baseTone + 7})`);
+        grad.addColorStop(0.55, `rgb(${baseTone}, ${baseTone - 3}, ${baseTone - 5})`);
+        grad.addColorStop(1, `rgb(${Math.max(16, baseTone - 14)}, ${Math.max(14, baseTone - 16)}, ${Math.max(12, baseTone - 17)})`);
+        octx.fillStyle = grad;
+        octx.fill();
+        octx.clip();
+
+        // 2. Burnt wood-grain / fibrous carbon striations
+        const grainAngle = (Math.random() - 0.5) * 0.8;
+        octx.save();
+        octx.rotate(grainAngle);
+        for (let y = -scale; y <= scale; y += 3.2) {
+          octx.strokeStyle = y % 6.4 < 3.2
+            ? 'rgba(15, 12, 11, 0.36)'
+            : 'rgba(130, 120, 112, 0.14)';
+          octx.lineWidth = 0.85;
+          octx.beginPath();
+          octx.moveTo(-scale * 1.4, y);
+          octx.quadraticCurveTo(0, y + (Math.random() - 0.5) * 2.5, scale * 1.4, y);
+          octx.stroke();
+        }
+        octx.restore();
+
+        // 3. Cellular carbon flecks
+        for (let c = 0; c < 14; c++) {
+          const cx = (Math.random() - 0.5) * scale * 1.6;
+          const cy = (Math.random() - 0.5) * scale * 1.1;
+          const cr = 0.8 + Math.random() * 1.7;
+          octx.fillStyle = c % 2 === 0
+            ? 'rgba(12, 10, 9, 0.52)'
+            : 'rgba(135, 126, 118, 0.16)';
+          octx.beginPath();
+          octx.arc(cx, cy, cr, 0, Math.PI * 2);
+          octx.fill();
+        }
+
+        // 4. Genuine Micro-Perforations / Burn Pinholes punched through the ash
+        octx.globalCompositeOperation = 'destination-out';
+        const holeCount = 3 + Math.floor(Math.random() * 4);
+        for (let h = 0; h < holeCount; h++) {
+          const hx = (Math.random() - 0.5) * scale * 1.25;
+          const hy = (Math.random() - 0.5) * scale * 0.85;
+          const hr = 1.3 + Math.random() * 2.1;
+          octx.fillStyle = 'rgba(0, 0, 0, 1)';
+          octx.beginPath();
+          octx.ellipse(hx, hy, hr * 1.25, hr * 0.85, Math.random() * Math.PI, 0, Math.PI * 2);
+          octx.fill();
+        }
+
+        // 5. Charred dark-soot halo immediately behind the active burn margin
+        octx.globalCompositeOperation = 'source-atop';
+        const vCount = vertices.length;
+        octx.strokeStyle = 'rgba(14, 11, 10, 0.85)';
+        octx.lineWidth = 5.5;
+        octx.lineCap = 'round';
+        octx.beginPath();
+        for (let s = 0; s <= burnSpan; s++) {
+          const v = vertices[(burnStartIdx + s) % vCount];
+          if (s === 0) octx.moveTo(v.x * scale, v.y * scale);
+          else octx.lineTo(v.x * scale, v.y * scale);
+        }
+        octx.stroke();
+
+        octx.restore();
+        return { canvas: off, scale: scale, size: texSize };
+      }
+
+      /**
+       * Pre-Baked Procedural Offscreen Texture Generator for Craggy Volcanic Cinders:
+       * Builds a beveled 9-12 facet charcoal/obsidian polyhedron with specular ridge
+       * highlights so the dynamic branching magma fissures glow deep inside the cracks.
+       */
+      function bakeCinderCrustTexture(vertices) {
+        const texSize = 96;
+        const half = texSize / 2;
+        const scale = 34;
+        const off = document.createElement('canvas');
+        off.width = texSize;
+        off.height = texSize;
+        const octx = off.getContext('2d');
+
+        octx.save();
+        octx.translate(half, half);
+
+        // Outer craggy polyhedron silhouette
+        octx.beginPath();
+        for (let i = 0; i < vertices.length; i++) {
+          const v = vertices[i];
+          if (i === 0) octx.moveTo(v.x * scale, v.y * scale);
+          else octx.lineTo(v.x * scale, v.y * scale);
+        }
+        octx.closePath();
+
+        const baseGrad = octx.createRadialGradient(-scale * 0.25, -scale * 0.25, scale * 0.1, 0, 0, scale * 1.15);
+        baseGrad.addColorStop(0, '#2B221E');
+        baseGrad.addColorStop(0.65, '#191311');
+        baseGrad.addColorStop(1, '#0E0A09');
+        octx.fillStyle = baseGrad;
+        octx.fill();
+        octx.clip();
+
+        // Render triangular beveled crust plates from center to each perimeter edge
+        for (let i = 0; i < vertices.length; i++) {
+          const v1 = vertices[i];
+          const v2 = vertices[(i + 1) % vertices.length];
+          const facetLight = (i % 2 === 0 ? 1 : -1) * 7 + Math.sin(i * 1.7) * 5;
+          const rCol = Math.max(14, Math.min(48, Math.round(28 + facetLight)));
+          const gCol = Math.max(11, Math.min(40, Math.round(22 + facetLight * 0.8)));
+          const bCol = Math.max(10, Math.min(36, Math.round(19 + facetLight * 0.7)));
+
+          octx.beginPath();
+          octx.moveTo(0, 0);
+          octx.lineTo(v1.x * scale, v1.y * scale);
+          octx.lineTo(v2.x * scale, v2.y * scale);
+          octx.closePath();
+          octx.fillStyle = `rgb(${rCol}, ${gCol}, ${bCol})`;
+          octx.fill();
+
+          // Subtle bevel ridge line
+          octx.strokeStyle = 'rgba(65, 52, 46, 0.35)';
+          octx.lineWidth = 0.8;
+          octx.stroke();
+        }
+
+        // Pitted volcanic slag pores on crust surface
+        for (let p = 0; p < 12; p++) {
+          const px = (Math.random() - 0.5) * scale * 1.3;
+          const py = (Math.random() - 0.5) * scale * 1.3;
+          octx.fillStyle = 'rgba(8, 6, 5, 0.65)';
+          octx.beginPath();
+          octx.arc(px, py, 0.9 + Math.random() * 1.4, 0, Math.PI * 2);
+          octx.fill();
+        }
+
+        octx.restore();
+        return { canvas: off, scale: scale, size: texSize };
+      }
+
+      const mouse = {
+        x: -9999,
+        y: -9999,
+        vx: 0,
+        vy: 0,
+        lastX: -9999,
+        lastY: -9999,
+        normX: 0,
+        normY: 0,
+        smoothNormX: 0,
+        smoothNormY: 0,
+        active: false,
+        isDown: false
+      };
+
+      function resizeCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const rect = canvas.parentElement.getBoundingClientRect();
+        width = rect.width;
+        height = rect.height;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      /**
+       * Scalar stream function Psi(x, y, t) used to compute a 2D Curl-Noise
+       * divergence-free velocity field: v = (dPsi/dy, -dPsi/dx).
+       */
+      function streamPotential(x, y, t, seed) {
+        const s1 = 0.0024;
+        const s2 = 0.0056;
+        const s3 = 0.0115;
+
+        const plume1 = Math.sin(x * s1 + Math.cos(y * s1 * 0.85 + t * 0.36) * 1.45 + seed * 0.7)
+                     * Math.cos(y * s1 * 1.15 - t * 0.48);
+        const eddy2  = Math.sin((x * s2 - y * s2 * 0.9) + t * 0.75 + seed) * 0.42;
+        const curl3  = Math.cos((x * s3 + y * s3 * 1.1) - t * 1.35) * 0.16;
+
+        return plume1 + eddy2 + curl3;
+      }
+
+      function sampleCurlField(x, y, t, seed) {
+        const eps = 3.5;
+        const pY1 = streamPotential(x, y + eps, t, seed);
+        const pY0 = streamPotential(x, y - eps, t, seed);
+        const pX1 = streamPotential(x + eps, y, t, seed);
+        const pX0 = streamPotential(x - eps, y, t, seed);
+
+        const vx = (pY1 - pY0) / (2 * eps) * 185;
+        const vy = -(pX1 - pX0) / (2 * eps) * 145;
+
+        let windX = 0;
+        if (windMode === 'auto') {
+          windX = Math.sin(t * 0.28) * 0.24 + Math.sin(t * 0.71 + 1.4) * 0.14;
+        } else if (windMode === 'gust') {
+          windX = 0.68 + Math.sin(t * 1.35) * 0.32;
+        }
+
+        return { fx: vx + windX, fy: vy };
+      }
+
+      /**
+       * Continuous Blackbody Radiation Ramp:
+       * 0.00 = Dead matte charcoal (#2C2724)
+       * 0.25 = Deep cherry red (#8F1600)
+       * 0.50 = Molten orange (#FF4D00)
+       * 0.75 = Bright amber-gold (#FFB800)
+       * 1.00 = Superheated white-yellow (#FFFDF2)
+       */
+      function getBlackbodyRGB(temp) {
+        const t = Math.max(0, Math.min(1, temp));
+        if (t < 0.25) {
+          const k = t / 0.25;
+          return {
+            r: Math.round(44 + (143 - 44) * k),
+            g: Math.round(39 + (22 - 39) * k),
+            b: Math.round(36 + (0 - 36) * k)
+          };
+        } else if (t < 0.5) {
+          const k = (t - 0.25) / 0.25;
+          return {
+            r: Math.round(143 + (255 - 143) * k),
+            g: Math.round(22 + (77 - 22) * k),
+            b: 0
+          };
+        } else if (t < 0.75) {
+          const k = (t - 0.5) / 0.25;
+          return {
+            r: 255,
+            g: Math.round(77 + (184 - 77) * k),
+            b: 0
+          };
+        } else {
+          const k = (t - 0.75) / 0.25;
+          return {
+            r: 255,
+            g: Math.round(184 + (253 - 184) * k),
+            b: Math.round(242 * k)
+          };
+        }
+      }
+
+      function rgbToStr(rgb, alpha = 1) {
+        return alpha < 1
+          ? `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha.toFixed(3)})`
+          : `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+      }
+
+      /* ---------------------------------------------------------------------
+         Volumetric Rising Smoke / Heat Haze Wisp
+         --------------------------------------------------------------------- */
+      class SmokeWisp {
+        constructor(spawnAtBottom = false) {
+          this.reset(spawnAtBottom);
+        }
+
+        reset(spawnAtBottom = true) {
+          this.x = Math.random() * (width + 200) - 100;
+          this.y = spawnAtBottom ? height + 90 + Math.random() * 80 : Math.random() * height;
+          this.radius = 85 + Math.random() * 110;
+          this.vy = -(0.22 + Math.random() * 0.26);
+          this.vx = (Math.random() - 0.5) * 0.2;
+          this.seed = Math.random() * 50;
+          this.life = 0;
+          this.maxLife = 420 + Math.random() * 260;
+          this.alpha = 0;
+          this.peakAlpha = 0.35 + Math.random() * 0.25;
+        }
+
+        update(dt) {
+          this.life += dt;
+          const curl = sampleCurlField(this.x, this.y, simTime * 0.7, this.seed);
+          this.vx = this.vx * 0.96 + curl.fx * 0.015;
+          this.vy = this.vy * 0.98 + curl.fy * 0.008 - 0.002;
+          this.x += this.vx * dt;
+          this.y += this.vy * dt;
+          this.radius += 0.08 * dt;
+
+          const prog = this.life / this.maxLife;
+          if (prog < 0.2) {
+            this.alpha = this.peakAlpha * (prog / 0.2);
+          } else if (prog > 0.65) {
+            this.alpha = this.peakAlpha * Math.max(0, 1 - (prog - 0.65) / 0.35);
+          } else {
+            this.alpha = this.peakAlpha;
+          }
+
+          if (this.life >= this.maxLife || this.y < -this.radius * 1.5) {
+            this.reset(true);
+          }
+        }
+
+        draw() {
+          const px = this.x + mouse.smoothNormX * 10;
+          const py = this.y + mouse.smoothNormY * 6;
+          ctx.save();
+          ctx.globalAlpha = this.alpha;
+          ctx.drawImage(
+            spriteBank.smokePuff,
+            px - this.radius,
+            py - this.radius,
+            this.radius * 2,
+            this.radius * 2
+          );
+          ctx.restore();
+        }
+      }
+
+      /* ---------------------------------------------------------------------
+         Cinema-Grade Particle:
+         1. Teardrop Plasma Spark (with 4-needle thermal fracture micro-pops)
+         2. Beveled Craggy Cinder (with branching magma intersections & spallation)
+         3. Multi-Lobed Perforated Ash Flake (with advancing smoldering burn front)
+         4. Out-of-Focus Foreground Hexagonal Bokeh Ember (z > 0.88)
+         --------------------------------------------------------------------- */
+      class CombustionParticle {
+        constructor(options = {}) {
+          this.isBurst = Boolean(options.isBurst);
+          this.reset(options);
+        }
+
+        reset(options = {}) {
+          const pCfg = presetConfig[intensity] || presetConfig.blaze;
+
+          // Determine archetype & depth layer
+          if (options.type) {
+            this.type = options.type;
+            this.layer = options.layer !== undefined ? options.layer : (Math.random() < 0.3 ? 0 : (Math.random() < 0.74 ? 1 : 2));
+          } else if (!this.isBurst && Math.random() < pCfg.bokehRatio) {
+            // Close-camera depth-of-field bokeh ember (z > 0.88)
+            this.type = 'bokeh';
+            this.layer = 3;
+          } else {
+            const layerRoll = Math.random();
+            this.layer = options.layer !== undefined
+              ? options.layer
+              : (layerRoll < 0.28 ? 0 : (layerRoll < 0.72 ? 1 : 2));
+            const r = Math.random();
+            if (r < pCfg.sparkRatio) {
+              this.type = 'spark';
+            } else if (r < pCfg.sparkRatio + pCfg.cinderRatio) {
+              this.type = 'cinder';
+            } else {
+              this.type = 'ash';
+            }
+          }
+
+          const cfg = depthConfig[this.layer];
+
+          this.x = options.x !== undefined ? options.x : (Math.random() * (width + 140) - 70);
+          this.y = options.y !== undefined
+            ? options.y
+            : (options.spawnAtBottom ? height + Math.random() * 45 : Math.random() * height);
+
+          this.life = 0;
+          this.seed = Math.random() * 120;
+          this.oxygenBoost = 0;
+          this.trail = [];
+
+          if (this.type === 'bokeh') {
+            // Foreground Out-of-Focus Optical Bokeh Ember (z in [0.89, 1.0])
+            this.zDepth = 0.89 + Math.random() * 0.11;
+            const bokehFactor = (this.zDepth - 0.85) * 6.5;
+            this.baseSize = (14 + bokehFactor * 16);
+            this.vx = (Math.random() - 0.5) * 1.15;
+            this.vy = -(Math.random() * 1.65 + 1.05);
+            this.buoyancy = -(Math.random() * 0.014 + 0.008);
+            this.drag = 0.988;
+            this.curlGain = 0.062;
+            this.maxLife = Math.random() * 210 + 130;
+            this.baseAlpha = 0.18 + Math.random() * 0.16;
+            this.rot = Math.random() * Math.PI * 2;
+            this.rotSpeed = (Math.random() - 0.5) * 0.012;
+            this.pulsePhase = Math.random() * Math.PI * 2;
+
+          } else if (this.type === 'spark') {
+            // Aerodynamic Teardrop / Needle Plasma Filament
+            this.baseSize = (Math.random() * 1.55 + 0.85) * cfg.scale;
+            this.vx = options.vx !== undefined ? options.vx : (Math.random() - 0.5) * 0.95 * cfg.speed;
+            this.vy = options.vy !== undefined ? options.vy : -(Math.random() * 1.95 + 1.25) * cfg.speed;
+            this.buoyancy = -(Math.random() * 0.025 + 0.015) * cfg.speed;
+            this.drag = 0.986;
+            this.curlGain = 0.068 * cfg.speed;
+            this.maxLife = this.isBurst ? (Math.random() * 52 + 32) : (Math.random() * 190 + 115);
+            this.temperature = 0.88 + Math.random() * 0.12;
+            this.coolRate = options.coolRate !== undefined ? options.coolRate : (0.0033 + Math.random() * 0.0022);
+            this.baseAlpha = (0.86 + Math.random() * 0.14) * cfg.alpha;
+            this.maxTrail = this.layer === 0 ? 5 : 9;
+            this.canPop = !this.isBurst && Math.random() < 0.28;
+            this.hasPopped = false;
+            this.popTrigger = 0.32 + Math.random() * 0.36;
+
+          } else if (this.type === 'cinder') {
+            // Craggy Beveled Coal Chunk with Branching Magma Fissures & Micro-Spallation
+            this.baseSize = (Math.random() * 3.3 + 2.0) * cfg.scale;
+            this.vx = options.vx !== undefined ? options.vx : (Math.random() - 0.5) * 0.48 * cfg.speed;
+            this.vy = options.vy !== undefined ? options.vy : -(Math.random() * 0.72 + 0.3) * cfg.speed;
+            this.buoyancy = -(Math.random() * 0.0072 + 0.0036) * cfg.speed;
+            this.drag = 0.985;
+            this.curlGain = 0.046 * cfg.speed;
+            this.maxLife = this.isBurst ? (Math.random() * 90 + 58) : (Math.random() * 360 + 220);
+            this.temperature = 0.56 + Math.random() * 0.38;
+            this.coolRate = 0.00105 + Math.random() * 0.00085;
+            this.flareFreq = 0.065 + Math.random() * 0.095;
+            this.baseAlpha = (0.80 + Math.random() * 0.20) * cfg.alpha;
+
+            this.rot = Math.random() * Math.PI * 2;
+            this.rotSpeed = (Math.random() - 0.5) * 0.036;
+            this.tumblePhase = Math.random() * Math.PI * 2;
+            this.tumbleSpeed = 0.024 + Math.random() * 0.034;
+
+            // 9-12 craggy polyhedron vertices
+            const pts = 9 + Math.floor(Math.random() * 4);
+            this.vertices = [];
+            for (let i = 0; i < pts; i++) {
+              const ang = (i / pts) * Math.PI * 2 + (Math.random() - 0.5) * 0.16;
+              const rad = 0.66 + Math.random() * 0.38;
+              this.vertices.push({ x: Math.cos(ang) * rad, y: Math.sin(ang) * rad });
+            }
+
+            // Pre-bake beveled charcoal/obsidian crust texture
+            this.crustTexture = bakeCinderCrustTexture(this.vertices);
+
+            // Branching magma fissure network meeting at a superheated central junction
+            this.junction = {
+              x: (Math.random() - 0.5) * 0.26,
+              y: (Math.random() - 0.5) * 0.26
+            };
+            const branchCount = 3 + Math.floor(Math.random() * 2);
+            this.fissures = [];
+            for (let b = 0; b < branchCount; b++) {
+              const vIdx = Math.floor((b / branchCount) * pts + Math.random() * 2) % pts;
+              const vEnd = this.vertices[vIdx];
+              const elbowX = (this.junction.x + vEnd.x) * 0.48 + (Math.random() - 0.5) * 0.24;
+              const elbowY = (this.junction.y + vEnd.y) * 0.48 + (Math.random() - 0.5) * 0.24;
+
+              // Optional secondary fork off the main fissure
+              const hasFork = Math.random() < 0.65;
+              const vFork = this.vertices[(vIdx + 2) % pts];
+              this.fissures.push({
+                ex: elbowX,
+                ey: elbowY,
+                x1: vEnd.x * 0.88,
+                y1: vEnd.y * 0.88,
+                hasFork: hasFork,
+                fx1: (elbowX + vFork.x) * 0.52,
+                fy1: (elbowY + vFork.y) * 0.52,
+                widthRatio: 0.14 + Math.random() * 0.1,
+                phaseOffset: Math.random() * Math.PI * 2
+              });
+            }
+
+            // Micro-spallation timer (hot cinders occasionally shed 1-2 sub-pixel sparks/soot flecks)
+            this.spallCooldown = 45 + Math.random() * 90;
+
+          } else {
+            // Multi-Lobed Perforated Ash Flake with Advancing Smoldering Ember Front
+            this.baseSize = (Math.random() * 5.2 + 3.0) * cfg.scale;
+            this.vx = options.vx !== undefined ? options.vx : (Math.random() - 0.48) * 0.6 * cfg.speed;
+            this.vy = options.vy !== undefined ? options.vy : -(Math.random() * 0.34 + 0.08) * cfg.speed;
+            this.buoyancy = -(Math.random() * 0.002 + 0.0005) * cfg.speed;
+            this.drag = 0.975;
+            this.curlGain = 0.056 * cfg.speed;
+            this.maxLife = this.isBurst ? (Math.random() * 115 + 70) : (Math.random() * 520 + 300);
+            this.baseAlpha = (0.52 + Math.random() * 0.38) * cfg.alpha;
+
+            // Active smoldering ember front state (~48% start with an active glowing burn edge)
+            this.hasEmberEdge = Math.random() < 0.48;
+            this.temperature = this.hasEmberEdge ? (0.46 + Math.random() * 0.36) : (0.02 + Math.random() * 0.08);
+            this.coolRate = 0.0012 + Math.random() * 0.0009;
+            this.burnProgress = 0; // Advances inward from 0 -> 1 as the ember eats the edge
+            this.sootShedTimer = 18 + Math.random() * 28;
+
+            // 3D Pitch / Yaw / Roll tumbling angles
+            this.rotZ = Math.random() * Math.PI * 2;
+            this.rotZSpeed = (Math.random() - 0.5) * 0.038;
+            this.pitch = Math.random() * Math.PI * 2;
+            this.pitchSpeed = 0.03 + Math.random() * 0.052;
+            this.yaw = Math.random() * Math.PI * 2;
+            this.yawSpeed = 0.022 + Math.random() * 0.04;
+            this.roll = Math.random() * Math.PI * 2;
+            this.rollSpeed = 0.024 + Math.random() * 0.044;
+
+            // 12-16 vertex multi-lobed jaggedly serrated silhouette
+            const vCount = 12 + Math.floor(Math.random() * 5);
+            this.vertices = [];
+            const elongation = 1.15 + Math.random() * 0.45;
+            const lobeFreq = 2 + Math.floor(Math.random() * 2);
+            const lobePhase = Math.random() * Math.PI * 2;
+            for (let i = 0; i < vCount; i++) {
+              const angle = (i / vCount) * Math.PI * 2 + (Math.random() - 0.5) * 0.11;
+              const macroLobe = 0.85 + 0.24 * Math.sin(angle * lobeFreq + lobePhase);
+              const microSerration = (i % 2 === 0 ? 1.08 : 0.78) + (Math.random() - 0.5) * 0.18;
+              const radiusRatio = macroLobe * microSerration;
+              this.vertices.push({
+                x: Math.cos(angle) * radiusRatio * elongation,
+                y: Math.sin(angle) * radiusRatio * 0.72
+              });
+            }
+
+            // Contiguous torn arc (4-5 vertices) where the smoldering burn front lives
+            this.burnStartIdx = Math.floor(Math.random() * vCount);
+            this.burnSpan = 4 + Math.floor(Math.random() * 2);
+
+            const baseTone = Math.floor(38 + Math.random() * 24);
+            this.ashTexture = bakeAshFlakeTexture(this.vertices, this.burnStartIdx, this.burnSpan, baseTone);
+          }
+        }
+
+        update(dt) {
+          this.life += dt;
+          const cfg = depthConfig[this.layer];
+          const curl = sampleCurlField(this.x, this.y, simTime, this.seed);
+
+          this.vx = this.vx * this.drag + curl.fx * this.curlGain;
+          this.vy = this.vy * this.drag + curl.fy * this.curlGain + this.buoyancy;
+
+          // Aerodynamic Cursor Wake (skip for out-of-focus camera lens bokeh)
+          if (mouse.active && this.type !== 'bokeh') {
+            const dx = this.x - mouse.x;
+            const dy = this.y - mouse.y;
+            const distSq = dx * dx + dy * dy;
+            const wakeRadius = (this.type === 'ash' ? 190 : 160) * (0.75 + this.layer * 0.22);
+
+            if (distSq < wakeRadius * wakeRadius && distSq > 1) {
+              const dist = Math.sqrt(distSq);
+              const falloff = 1 - dist / wakeRadius;
+              const nx = dx / dist;
+              const ny = dy / dist;
+              const swirlDir = (this.seed % 2 > 1) ? 1 : -1;
+
+              if (this.type === 'ash') {
+                this.vx += (nx * 0.34 - ny * swirlDir * 0.26) * falloff * cfg.speed + mouse.vx * 0.03 * falloff;
+                this.vy += (ny * 0.26 + nx * swirlDir * 0.20) * falloff * cfg.speed + mouse.vy * 0.024 * falloff;
+                this.pitchSpeed = Math.min(0.22, this.pitchSpeed + falloff * 0.012);
+                this.rollSpeed = Math.min(0.18, this.rollSpeed + falloff * 0.01);
+                this.oxygenBoost = Math.min(0.48, this.oxygenBoost + falloff * 0.045);
+              } else {
+                this.vx += (-ny * swirlDir * 0.25 + nx * 0.14) * falloff * cfg.speed + mouse.vx * 0.02 * falloff;
+                this.vy += (nx * swirlDir * 0.18 - 0.08) * falloff * cfg.speed + mouse.vy * 0.016 * falloff;
+                this.oxygenBoost = Math.min(0.58, this.oxygenBoost + falloff * 0.058);
+              }
+            }
+          }
+
+          this.x += this.vx * dt;
+          this.y += this.vy * dt;
+
+          if (this.type === 'bokeh') {
+            this.rot += this.rotSpeed * dt;
+            this.pulsePhase += 0.04 * dt;
+
+          } else if (this.type === 'spark') {
+            this.trail.unshift({ x: this.x, y: this.y });
+            if (this.trail.length > this.maxTrail) {
+              this.trail.pop();
+            }
+
+            // Miniature thermal fracture mid-air: splits into 4 diverging micro-needles
+            const prog = this.life / this.maxLife;
+            if (this.canPop && !this.hasPopped && prog >= this.popTrigger && this.layer >= 1) {
+              this.hasPopped = true;
+              spawnMicroPop(this.x, this.y, this.vx, this.vy, this.layer);
+            }
+
+          } else if (this.type === 'cinder') {
+            this.rot += this.rotSpeed * dt;
+            this.tumblePhase += this.tumbleSpeed * dt;
+
+            // Occasional micro-spallation: hot cinders shed 1-2 sub-pixel sparks or soot flecks
+            this.spallCooldown -= dt;
+            const currentTemp = Math.min(1, this.temperature + this.oxygenBoost);
+            if (this.spallCooldown <= 0 && currentTemp > 0.45 && this.layer >= 1) {
+              this.spallCooldown = 75 + Math.random() * 110;
+              spawnCinderSpallation(this.x, this.y, this.vx, this.vy, this.layer);
+            }
+
+          } else if (this.type === 'ash') {
+            this.rotZ += this.rotZSpeed * dt;
+            this.pitch += this.pitchSpeed * dt;
+            this.yaw += this.yawSpeed * dt;
+            this.roll += this.rollSpeed * dt;
+            this.pitchSpeed = Math.max(0.03, this.pitchSpeed * 0.99);
+            this.rollSpeed = Math.max(0.024, this.rollSpeed * 0.99);
+
+            // Advancing smoldering ember front eats inward & sheds tiny pale-gray micro-ash specks
+            const edgeTemp = Math.min(1, this.temperature + this.oxygenBoost * 0.85);
+            if (edgeTemp > 0.24) {
+              this.burnProgress = Math.min(0.28, this.burnProgress + 0.00065 * dt);
+              this.sootShedTimer -= dt;
+              if (this.sootShedTimer <= 0 && this.layer >= 1) {
+                this.sootShedTimer = 26 + Math.random() * 34;
+                spawnMicroSootSpeck(this.x, this.y, this.layer);
+              }
+            }
+          }
+
+          this.oxygenBoost *= 0.93;
+          this.temperature = Math.max(0.0, this.temperature - this.coolRate * dt);
+
+          const progress = this.life / this.maxLife;
+          if (progress < 0.1) {
+            this.alpha = this.baseAlpha * (progress / 0.1);
+          } else if (progress > 0.72) {
+            this.alpha = this.baseAlpha * Math.max(0, 1 - (progress - 0.72) / 0.28);
+          } else {
+            this.alpha = this.baseAlpha;
+          }
+
+          const outOfBounds = this.life >= this.maxLife || this.y < -65 || this.x < -130 || this.x > width + 130;
+          if (outOfBounds) {
+            if (this.isBurst) return false;
+            this.reset({ spawnAtBottom: true });
+          }
+          return true;
+        }
+
+        draw() {
+          const cfg = depthConfig[this.layer];
+          const offX = mouse.smoothNormX * cfg.parallax;
+          const offY = mouse.smoothNormY * (cfg.parallax * 0.65);
+          const px = this.x + offX;
+          const py = this.y + offY;
+
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, Math.min(1, this.alpha));
+
+          if (this.type === 'bokeh') {
+            // Close-Camera Out-of-Focus Hexagonal Optical Bokeh Disc
+            const pulse = 0.85 + 0.15 * Math.sin(this.pulsePhase);
+            const r = this.baseSize * pulse;
+            ctx.globalCompositeOperation = 'lighter';
+            ctx.translate(px, py);
+            ctx.rotate(this.rot);
+            ctx.drawImage(spriteBank.bokehHex, -r, -r, r * 2, r * 2);
+
+          } else if (this.type === 'spark') {
+            // Aerodynamic Teardrop / Needle Plasma Filament following velocity spline
+            const headTemp = Math.min(1, this.temperature + this.oxygenBoost);
+            const headRGB = getBlackbodyRGB(headTemp);
+            const midRGB = getBlackbodyRGB(Math.max(0.24, headTemp * 0.64));
+            const tailRGB = getBlackbodyRGB(Math.max(0.08, headTemp * 0.26));
+
+            ctx.globalCompositeOperation = 'lighter';
+
+            if (this.trail.length > 1) {
+              const tailPt = this.trail[this.trail.length - 1];
+              const tx = tailPt.x + offX;
+              const ty = tailPt.y + offY;
+              const dx = px - tx;
+              const dy = py - ty;
+              const len = Math.hypot(dx, dy);
+
+              if (len > 0.8) {
+                const grad = ctx.createLinearGradient(px, py, tx, ty);
+                grad.addColorStop(0.0, rgbToStr(headRGB, 1));
+                grad.addColorStop(0.32, rgbToStr(midRGB, 0.88));
+                grad.addColorStop(1.0, rgbToStr(tailRGB, 0));
+
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+
+                const leftPts = [];
+                const rightPts = [];
+                const baseHalfW = this.baseSize * 0.88;
+
+                for (let i = 0; i < this.trail.length; i++) {
+                  const pt = this.trail[i];
+                  const prev = i === 0 ? { x: this.x + this.vx, y: this.y + this.vy } : this.trail[i - 1];
+                  const segDx = prev.x - pt.x;
+                  const segDy = prev.y - pt.y;
+                  const segLen = Math.hypot(segDx, segDy) || 1;
+                  const nx = -segDy / segLen;
+                  const ny = segDx / segLen;
+
+                  // Smooth aerodynamic teardrop taper along the spline
+                  const tNorm = i / (this.trail.length - 1);
+                  const w = baseHalfW * Math.pow(1 - tNorm, 1.35);
+
+                  leftPts.push({ x: pt.x + offX + nx * w, y: pt.y + offY + ny * w });
+                  rightPts.push({ x: pt.x + offX - nx * w, y: pt.y + offY - ny * w });
+                }
+
+                // Rounded teardrop nose ahead of the head center
+                const noseAngle = Math.atan2(this.vy, this.vx);
+                ctx.arc(px, py, baseHalfW, noseAngle + Math.PI * 0.5, noseAngle - Math.PI * 0.5, true);
+
+                for (let i = 1; i < leftPts.length; i++) {
+                  ctx.lineTo(leftPts[i].x, leftPts[i].y);
+                }
+                ctx.lineTo(tx, ty);
+                for (let i = rightPts.length - 1; i >= 1; i--) {
+                  ctx.lineTo(rightPts[i].x, rightPts[i].y);
+                }
+                ctx.closePath();
+                ctx.fill();
+              }
+            }
+
+            // Superheated spherical/oval white-yellow plasma head + optical bloom halo
+            ctx.fillStyle = headTemp > 0.72 ? '#FFFDF2' : rgbToStr(headRGB);
+            ctx.beginPath();
+            ctx.arc(px, py, this.baseSize * 0.82, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.globalAlpha = Math.max(0, Math.min(1, this.alpha * (0.62 + headTemp * 0.38)));
+            const sprite = headTemp > 0.74 ? spriteBank.whiteHot : (headTemp > 0.38 ? spriteBank.emberHalo : spriteBank.cherryHalo);
+            const glowRadius = this.baseSize * (3.9 + headTemp * 3.1);
+            ctx.drawImage(sprite, px - glowRadius, py - glowRadius, glowRadius * 2, glowRadius * 2);
+
+          } else if (this.type === 'cinder') {
+            // Irregular Craggy Coal Chunk with Beveled Crust & Branching Magma Fissure Network
+            const flare = 0.76 + Math.sin(this.life * this.flareFreq + this.seed) * 0.24;
+            const effectiveTemp = Math.min(1, this.temperature * flare + this.oxygenBoost);
+            const fissureRGB = getBlackbodyRGB(effectiveTemp);
+            const coreHotRGB = getBlackbodyRGB(Math.min(1, effectiveTemp + 0.28));
+            const r = this.baseSize * (0.94 + effectiveTemp * 0.18);
+
+            const tumbleX = 0.66 + 0.34 * Math.abs(Math.cos(this.tumblePhase));
+            const tumbleY = 0.68 + 0.32 * Math.abs(Math.sin(this.tumblePhase * 0.85));
+
+            // 1. Atmospheric heat-haze aura
+            ctx.globalCompositeOperation = 'lighter';
+            const haloSprite = effectiveTemp > 0.56 ? spriteBank.emberHalo : spriteBank.cherryHalo;
+            const haloR = r * (3.2 + effectiveTemp * 2.8);
+            ctx.globalAlpha = Math.max(0, Math.min(1, this.alpha * (0.42 + effectiveTemp * 0.44)));
+            ctx.drawImage(haloSprite, px - haloR, py - haloR, haloR * 2, haloR * 2);
+
+            // 2. Render pre-baked beveled charcoal/obsidian crust plate texture
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.globalAlpha = Math.max(0, Math.min(1, this.alpha));
+            ctx.translate(px, py);
+            ctx.rotate(this.rot);
+            ctx.scale(tumbleX, tumbleY);
+
+            const texDrawSize = (this.crustTexture.size / this.crustTexture.scale) * r;
+            ctx.drawImage(
+              this.crustTexture.canvas,
+              -texDrawSize * 0.5,
+              -texDrawSize * 0.5,
+              texDrawSize,
+              texDrawSize
+            );
+
+            // Clip to exact cinder silhouette so branching magma fissures stay recessed inside cracks
+            ctx.beginPath();
+            for (let i = 0; i < this.vertices.length; i++) {
+              const v = this.vertices[i];
+              if (i === 0) ctx.moveTo(v.x * r, v.y * r);
+              else ctx.lineTo(v.x * r, v.y * r);
+            }
+            ctx.closePath();
+            ctx.clip();
+
+            // 3. Render branching incandescent magma fissures & superheated central junction
+            if (effectiveTemp > 0.14) {
+              ctx.globalCompositeOperation = 'lighter';
+              ctx.lineCap = 'round';
+              ctx.lineJoin = 'round';
+
+              const jx = (this.junction.x + Math.sin(this.tumblePhase) * 0.08) * r;
+              const jy = (this.junction.y + Math.cos(this.tumblePhase) * 0.08) * r;
+
+              for (let b = 0; b < this.fissures.length; b++) {
+                const f = this.fissures[b];
+                const vis = 0.5 + 0.5 * Math.cos(this.tumblePhase + f.phaseOffset);
+                if (vis <= 0.15) continue;
+
+                ctx.globalAlpha = Math.max(0, Math.min(1, this.alpha * vis));
+
+                // Outer molten orange-gold fissure glow
+                ctx.strokeStyle = rgbToStr(fissureRGB, 0.92);
+                ctx.lineWidth = Math.max(0.95, r * f.widthRatio * 1.75);
+                ctx.beginPath();
+                ctx.moveTo(jx, jy);
+                ctx.lineTo(f.ex * r, f.ey * r);
+                ctx.lineTo(f.x1 * r, f.y1 * r);
+                if (f.hasFork) {
+                  ctx.moveTo(f.ex * r, f.ey * r);
+                  ctx.lineTo(f.fx1 * r, f.fy1 * r);
+                }
+                ctx.stroke();
+
+                // Inner white-yellow incandescent core line
+                ctx.strokeStyle = rgbToStr(coreHotRGB, 0.98);
+                ctx.lineWidth = Math.max(0.45, r * f.widthRatio * 0.68);
+                ctx.beginPath();
+                ctx.moveTo(jx, jy);
+                ctx.lineTo(f.ex * r, f.ey * r);
+                ctx.lineTo(f.x1 * r, f.y1 * r);
+                if (f.hasFork) {
+                  ctx.moveTo(f.ex * r, f.ey * r);
+                  ctx.lineTo(f.fx1 * r, f.fy1 * r);
+                }
+                ctx.stroke();
+              }
+
+              // Deepest fissure intersection hotspot (#FFF6D6 when hot)
+              ctx.globalAlpha = Math.max(0, Math.min(1, this.alpha));
+              ctx.fillStyle = effectiveTemp > 0.62 ? '#FFF6D6' : rgbToStr(coreHotRGB);
+              ctx.beginPath();
+              ctx.arc(jx, jy, Math.max(0.65, r * 0.17), 0, Math.PI * 2);
+              ctx.fill();
+            }
+
+          } else {
+            // Multi-Lobed Perforated Ash Flake with Dynamic 3D Normal Shading & Advancing Burn Front
+            const cosPitch = Math.cos(this.pitch);
+            const sinPitch = Math.sin(this.pitch);
+            const cosRoll = Math.cos(this.roll);
+            const sinRoll = Math.sin(this.roll);
+
+            // Curled-edge perspective foreshortening from 3D pitch & roll
+            const scaleX = Math.max(0.18, Math.abs(cosPitch));
+            const scaleY = Math.max(0.22, Math.abs(cosRoll));
+            const skewX = sinPitch * sinRoll * 0.24;
+
+            // Compute 3D surface normal Z & Y components to determine light bounce orientation:
+            // normalY > 0 means surface tilts downward toward the hearth; normalY < 0 tilts upward
+            const normalY = sinPitch * cosRoll;
+            const facingHearth = Math.max(0, normalY);
+            const facingSky = Math.max(0, -normalY);
+
+            ctx.translate(px, py);
+            ctx.rotate(this.rotZ);
+            ctx.transform(scaleX, 0, skewX, scaleY, 0, 0);
+
+            // 1. Draw pre-baked perforated & textured ash flake sprite
+            const texDrawSize = (this.ashTexture.size / this.ashTexture.scale) * this.baseSize;
+            ctx.drawImage(
+              this.ashTexture.canvas,
+              -texDrawSize * 0.5,
+              -texDrawSize * 0.5,
+              texDrawSize,
+              texDrawSize
+            );
+
+            // Build silhouette path for dynamic 3D normal rim shading & smoldering burn front
+            ctx.beginPath();
+            for (let i = 0; i < this.vertices.length; i++) {
+              const v = this.vertices[i];
+              if (i === 0) ctx.moveTo(v.x * this.baseSize, v.y * this.baseSize);
+              else ctx.lineTo(v.x * this.baseSize, v.y * this.baseSize);
+            }
+            ctx.closePath();
+
+            // 2. Dynamic 3D Surface Normal Lighting:
+            // Downward-tilted flakes catch warm orange-amber bounce light from the hearth below;
+            // Upward-tilted flakes show cool matte obsidian-gray rim highlights.
+            const hearthProximity = Math.max(0.2, (py - height * 0.35) / (height * 0.65));
+            if (facingHearth > 0.12) {
+              ctx.strokeStyle = `rgba(255, 138, 42, ${(facingHearth * hearthProximity * 0.48).toFixed(3)})`;
+              ctx.lineWidth = Math.max(0.65, 0.85 * cfg.scale);
+              ctx.stroke();
+            } else if (facingSky > 0.12) {
+              ctx.strokeStyle = `rgba(175, 168, 162, ${(facingSky * 0.28).toFixed(3)})`;
+              ctx.lineWidth = Math.max(0.55, 0.72 * cfg.scale);
+              ctx.stroke();
+            }
+
+            // 3. Active Smoldering Ember Front eating across the torn edge
+            const edgeTemp = Math.min(1, this.temperature + this.oxygenBoost * 0.85);
+            if (edgeTemp > 0.16) {
+              ctx.save();
+              ctx.clip();
+              ctx.globalCompositeOperation = 'lighter';
+              ctx.lineCap = 'round';
+              ctx.lineJoin = 'round';
+
+              const emberRGB = getBlackbodyRGB(edgeTemp);
+              const hotFrontRGB = getBlackbodyRGB(Math.min(1, edgeTemp + 0.26));
+              const vCount = this.vertices.length;
+              const inwardFactor = 1 - this.burnProgress;
+
+              // Outer molten orange-red thermal bleed
+              ctx.strokeStyle = rgbToStr(emberRGB, Math.min(0.95, edgeTemp * 1.15));
+              ctx.lineWidth = Math.max(1.2, this.baseSize * (0.24 + edgeTemp * 0.22));
+              ctx.beginPath();
+              for (let s = 0; s <= this.burnSpan; s++) {
+                const v = this.vertices[(this.burnStartIdx + s) % vCount];
+                const bx = v.x * this.baseSize * inwardFactor;
+                const by = v.y * this.baseSize * inwardFactor;
+                if (s === 0) ctx.moveTo(bx, by);
+                else ctx.lineTo(bx, by);
+              }
+              ctx.stroke();
+
+              // Razor-thin amber-gold incandescent combustion front
+              if (edgeTemp > 0.34) {
+                ctx.strokeStyle = rgbToStr(hotFrontRGB, 0.96);
+                ctx.lineWidth = Math.max(0.55, this.baseSize * 0.11);
+                ctx.stroke();
+              }
+              ctx.restore();
+            }
+          }
+
+          ctx.restore();
+        }
+      }
+
+      /**
+       * Miniature thermal fracture mid-air: splits a hot spark into 4 tiny
+       * diverging micro-needles that rapidly cool and wink out.
+       */
+      function spawnMicroPop(x, y, vx, vy, layer) {
+        for (let i = 0; i < 4; i++) {
+          const ang = (Math.PI * 2 * i) / 4 + (Math.random() - 0.5) * 0.65;
+          const spd = 1.1 + Math.random() * 1.9;
+          const micro = new CombustionParticle({
+            isBurst: true,
+            type: 'spark',
+            layer: layer,
+            x: x,
+            y: y,
+            vx: vx * 0.35 + Math.cos(ang) * spd,
+            vy: vy * 0.35 + Math.sin(ang) * spd - 0.45,
+            coolRate: 0.014 + Math.random() * 0.008
+          });
+          micro.baseSize *= 0.62;
+          micro.maxLife = 22 + Math.random() * 14;
+          micro.maxTrail = 5;
+          burstParticles.push(micro);
+        }
+      }
+
+      /**
+       * Micro-spallation: hot craggy cinders occasionally shed 1-2 sub-pixel sparks
+       * or tiny soot flecks as their outer crust fractures mid-flight.
+       */
+      function spawnCinderSpallation(x, y, vx, vy, layer) {
+        const count = Math.random() < 0.45 ? 2 : 1;
+        for (let i = 0; i < count; i++) {
+          const ang = Math.random() * Math.PI * 2;
+          const spd = 0.45 + Math.random() * 0.95;
+          const fleck = new CombustionParticle({
+            isBurst: true,
+            type: Math.random() < 0.65 ? 'spark' : 'ash',
+            layer: layer,
+            x: x + (Math.random() - 0.5) * 4,
+            y: y + (Math.random() - 0.5) * 4,
+            vx: vx * 0.5 + Math.cos(ang) * spd,
+            vy: vy * 0.5 + Math.sin(ang) * spd,
+            coolRate: 0.012
+          });
+          fleck.baseSize *= 0.48;
+          fleck.maxLife = 28 + Math.random() * 18;
+          burstParticles.push(fleck);
+        }
+      }
+
+      /**
+       * Pale-gray micro-ash speck shed behind an active smoldering ash edge
+       */
+      function spawnMicroSootSpeck(x, y, layer) {
+        const speck = new CombustionParticle({
+          isBurst: true,
+          type: 'ash',
+          layer: layer,
+          x: x + (Math.random() - 0.5) * 5,
+          y: y + (Math.random() - 0.5) * 5,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: -(0.12 + Math.random() * 0.22)
+        });
+        speck.hasEmberEdge = false;
+        speck.temperature = 0;
+        speck.baseSize *= 0.34;
+        speck.maxLife = 45 + Math.random() * 30;
+        burstParticles.push(speck);
+      }
+
+      /**
+       * Spawns a subtle cursor-trail micro-spark or continuous hold-ignition jet
+       */
+      function emitCursorIgnition(x, y, count, jetSpeedScale = 1) {
+        if (isPaused) return;
+        for (let i = 0; i < count; i++) {
+          const spread = (Math.random() - 0.5) * 1.5;
+          const isSpark = Math.random() < 0.78;
+          burstParticles.push(new CombustionParticle({
+            isBurst: true,
+            type: isSpark ? 'spark' : 'cinder',
+            layer: Math.random() > 0.35 ? 2 : 1,
+            x: x + (Math.random() - 0.5) * 10,
+            y: y + (Math.random() - 0.5) * 10,
+            vx: spread * jetSpeedScale + mouse.vx * 0.08,
+            vy: -(1.1 + Math.random() * 2.2) * jetSpeedScale + mouse.vy * 0.05
+          }));
+        }
+        if (burstParticles.length > 240) {
+          burstParticles.splice(0, burstParticles.length - 240);
+        }
+      }
+
+      /**
+       * Spawns a sharp radial crackle burst of curving sparks & kicked-up ash on click
+       */
+      function spawnSparkBurst(x, y) {
+        if (isPaused) return;
+        const sparkCount = 20;
+        const ashCount = 9;
+
+        for (let i = 0; i < sparkCount; i++) {
+          const angle = (Math.PI * 2 * i) / sparkCount + (Math.random() - 0.5) * 0.45;
+          const speed = 1.8 + Math.random() * 3.8;
+          burstParticles.push(new CombustionParticle({
+            isBurst: true,
+            type: 'spark',
+            layer: Math.random() > 0.3 ? 2 : 1,
+            x: x + (Math.random() - 0.5) * 8,
+            y: y + (Math.random() - 0.5) * 8,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 1.45
+          }));
+        }
+
+        for (let i = 0; i < ashCount; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 0.8 + Math.random() * 1.8;
+          burstParticles.push(new CombustionParticle({
+            isBurst: true,
+            type: 'ash',
+            layer: Math.random() > 0.45 ? 2 : 1,
+            x: x + (Math.random() - 0.5) * 16,
+            y: y + (Math.random() - 0.5) * 16,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 0.85
+          }));
+        }
+
+        if (burstParticles.length > 240) {
+          burstParticles.splice(0, burstParticles.length - 240);
+        }
+      }
+
+      function syncParticlePool() {
+        const cfg = presetConfig[intensity] || presetConfig.blaze;
+        while (particles.length < cfg.particles) {
+          particles.push(new CombustionParticle({ spawnAtBottom: false }));
+        }
+        if (particles.length > cfg.particles) {
+          particles.length = cfg.particles;
+        }
+
+        while (smokeWisps.length < cfg.smoke) {
+          smokeWisps.push(new SmokeWisp(false));
+        }
+        if (smokeWisps.length > cfg.smoke) {
+          smokeWisps.length = cfg.smoke;
+        }
+      }
+
+      let lastFrameTime = performance.now();
+
+      function animateParticles(now) {
+        const rawDt = (now - lastFrameTime) / 16.667;
+        const dt = Math.min(2.2, Math.max(0.4, rawDt || 1));
+        lastFrameTime = now;
+
+        mouse.smoothNormX += (mouse.normX - mouse.smoothNormX) * 0.06;
+        mouse.smoothNormY += (mouse.normY - mouse.smoothNormY) * 0.06;
+
+        if (!isPaused) {
+          simTime += 0.016 * dt;
+          ctx.clearRect(0, 0, width, height);
+
+          // Continuous ignition stream while holding mouse button down in hero
+          if (mouse.isDown && mouse.active) {
+            holdJetAccumulator += dt;
+            if (holdJetAccumulator >= 1.5) {
+              holdJetAccumulator = 0;
+              emitCursorIgnition(mouse.x, mouse.y, 3, 1.25);
+            }
+          }
+
+          // 1. Volumetric faint smoke wisps in background
+          for (let i = 0; i < smokeWisps.length; i++) {
+            smokeWisps[i].update(dt);
+            smokeWisps[i].draw();
+          }
+
+          // 2. Depth-sorted ambient combustion particles (layers 0 -> 3 including bokeh)
+          for (let layer = 0; layer <= 3; layer++) {
+            for (let i = 0; i < particles.length; i++) {
+              const p = particles[i];
+              if (p.layer === layer) {
+                p.update(dt);
+                p.draw();
+              }
+            }
+          }
+
+          // 3. Interactive click-burst, spallation & micro-pop particles
+          for (let i = burstParticles.length - 1; i >= 0; i--) {
+            const bp = burstParticles[i];
+            if (!bp.update(dt)) {
+              burstParticles.splice(i, 1);
+            } else {
+              bp.draw();
+            }
+          }
+        }
+
+        mouse.vx *= 0.88;
+        mouse.vy *= 0.88;
+        requestAnimationFrame(animateParticles);
+      }
+
+      // Pointer tracking, cursor micro-spark trail, and click-and-hold ignition
+      const heroSection = document.getElementById('top');
+      heroSection.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const nx = e.clientX - rect.left;
+        const ny = e.clientY - rect.top;
+        if (mouse.lastX !== -9999) {
+          mouse.vx = nx - mouse.lastX;
+          mouse.vy = ny - mouse.lastY;
+        }
+        mouse.x = nx;
+        mouse.y = ny;
+        mouse.lastX = nx;
+        mouse.lastY = ny;
+        mouse.active = true;
+
+        mouse.normX = (nx / Math.max(1, width)) * 2 - 1;
+        mouse.normY = (ny / Math.max(1, height)) * 2 - 1;
+
+        // Leave a delicate trail of micro-sparks when sweeping cursor briskly
+        const speed = Math.hypot(mouse.vx, mouse.vy);
+        if (speed > 7 && !e.target.closest('a, button')) {
+          trailSpawnAccumulator += speed * 0.035;
+          if (trailSpawnAccumulator >= 1) {
+            trailSpawnAccumulator = 0;
+            emitCursorIgnition(nx, ny, 1, 0.65);
+          }
+        }
+      });
+
+      heroSection.addEventListener('mousedown', (e) => {
+        if (e.target.closest('a, button')) return;
+        mouse.isDown = true;
+        const rect = canvas.getBoundingClientRect();
+        spawnSparkBurst(e.clientX - rect.left, e.clientY - rect.top);
+      });
+
+      window.addEventListener('mouseup', () => {
+        mouse.isDown = false;
+      });
+
+      heroSection.addEventListener('mouseleave', () => {
+        mouse.active = false;
+        mouse.isDown = false;
+        mouse.x = -9999;
+        mouse.y = -9999;
+        mouse.lastX = -9999;
+        mouse.lastY = -9999;
+        mouse.normX = 0;
+        mouse.normY = 0;
+      });
+
+      // Intensity Preset Buttons (Smolder / Blaze / Inferno / Off)
+      document.querySelectorAll('.intensity-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const mode = btn.dataset.intensity;
+          document.querySelectorAll('.intensity-btn').forEach((b) => {
+            if (b.dataset.intensity === mode) {
+              b.classList.add('bg-char', 'text-moltenGold', 'font-medium');
+              b.classList.remove('text-soot');
+            } else {
+              b.classList.remove('bg-char', 'text-moltenGold', 'font-medium');
+              b.classList.add('text-soot');
+            }
+          });
+
+          if (mode === 'off') {
+            isPaused = true;
+            ctx.clearRect(0, 0, width, height);
+          } else {
+            isPaused = false;
+            intensity = mode;
+            syncParticlePool();
+          }
+        });
+      });
+
+      // Wind / Cross-Draft Toggle (Auto -> Gust -> Calm)
+      const windToggleBtn = document.getElementById('windToggleBtn');
+      const mobileWindBtn = document.querySelector('[data-wind-mobile]');
+      function cycleWindMode() {
+        const order = ['auto', 'gust', 'calm'];
+        const labels = { auto: 'Wind: Auto', gust: 'Wind: Gust', calm: 'Wind: Calm' };
+        windMode = order[(order.indexOf(windMode) + 1) % order.length];
+        if (windToggleBtn) {
+          windToggleBtn.textContent = labels[windMode];
+          windToggleBtn.classList.toggle('text-moltenGold', windMode === 'gust');
+          windToggleBtn.classList.toggle('text-soot', windMode !== 'gust');
+        }
+        if (mobileWindBtn) {
+          mobileWindBtn.textContent = windMode === 'gust' ? 'Gust' : 'Wind';
+          mobileWindBtn.classList.toggle('text-moltenGold', windMode === 'gust');
+        }
+      }
+      if (windToggleBtn) windToggleBtn.addEventListener('click', cycleWindMode);
+      if (mobileWindBtn) mobileWindBtn.addEventListener('click', cycleWindMode);
+
+      window.addEventListener('resize', resizeCanvas);
+      window.addEventListener('load', () => {
+        resizeCanvas();
+        syncParticlePool();
+        lastFrameTime = performance.now();
+        requestAnimationFrame(animateParticles);
+      });
+
+      /* =====================================================================
+         2. MOUSE-TRACKING EMBER SPOTLIGHT ON PROJECT CARDS
+         ===================================================================== */
+      document.querySelectorAll('.ember-card').forEach((card) => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+
+      /* =====================================================================
+         3. PROJECT ARCHITECTURE MODAL DRAWER & LIVE GITHUB ENRICHMENT
+         ===================================================================== */
+      const projectData = {
+        'defacement-monitor': {
+          category: 'REPO // 01 — SECURITY SAAS • NODE.JS / REDIS',
+          title: 'Sentinel // Defacement & Uptime Monitor',
+          repoUrl: 'https://github.com/YasenK90/defacement-monitor',
+          summary: 'White-labeled website defacement and uptime monitoring platform built for agencies with visual DOM hashing, automated health probes, and instant alerts.',
+          highlights: [
+            'Puppeteer visual DOM diffing and structural/content hash verification to catch silent page tampering.',
+            'Redis queue scheduling for distributed, non-blocking multi-site availability and integrity checks.',
+            'Multi-tenant Supabase row-level isolation for agency workspaces, client domains, and alert routing.',
+            'SSRF-hardened target probing with strict DNS/IP validation before executing outbound checks.'
+          ],
+          tags: ['Node.js', 'React', 'Supabase', 'Redis', 'Tailwind']
+        },
+        'obsidian-security': {
+          category: 'REPO // 02 — OFFENSIVE SECURITY • AUDITING',
+          title: 'Obsidian Security',
+          repoUrl: 'https://github.com/YasenK90/obsidian-security',
+          summary: 'Security research toolkit, vulnerability assessment workflows, and defensive hardening utilities built for web and API attack surfaces.',
+          highlights: [
+            'Modular reconnaissance and target enumeration pipelines tailored for modern web and API footprints.',
+            'Automated security header, CORS, TLS, and endpoint misconfiguration verification routines.',
+            'Reproducible HTTP/API payload testing workflows designed for rapid triage and validation.',
+            'Structured reporting outputs for clean remediation handoffs and defensive hardening.'
+          ],
+          tags: ['Python', 'Bash', 'HTTP/API', 'SecOps']
+        },
+        'sol-monitor': {
+          category: 'REPO // 03 — AI AUTOMATION • LEAD GEN',
+          title: 'Sol Monitor // AI Lead Generation System',
+          repoUrl: 'https://github.com/YasenK90/sol-monitor',
+          summary: 'AI-powered lead generation and intent monitoring system that discovers, qualifies, and enriches high-value prospects automatically.',
+          highlights: [
+            'Automated multi-source signal monitoring to surface high-intent leads in real time.',
+            'LLM-driven qualification, scoring, and company/contact enrichment pipelines.',
+            'Structured deduplication and rate-limited ingestion workers for clean CRM-ready datasets.',
+            'Configurable outreach triggers and alerts for rapid sales pipeline execution.'
+          ],
+          tags: ['TypeScript', 'LLM Agents', 'Web Scraping', 'Node.js']
+        },
+        'offscript-academy': {
+          category: 'REPO // 04 — EDTECH PLATFORM • FULL-STACK',
+          title: 'Offscript Academy',
+          repoUrl: 'https://github.com/YasenK90/offscript-academy',
+          summary: 'Interactive learning platform and curriculum hub built for hands-on technical education, structured tracks, and progress tracking.',
+          highlights: [
+            'Component-driven course delivery architecture supporting modular lessons and practical labs.',
+            'Structured learning tracks with persistent milestone and module completion tracking.',
+            'Responsive dark-first reading and code-study interface optimized for long technical sessions.',
+            'Type-safe full-stack data flow built with React and TypeScript.'
+          ],
+          tags: ['React', 'TypeScript', 'Tailwind CSS', 'Full-Stack']
+        },
+        'northstar-travel': {
+          category: 'REPO // 05 — WEB APPLICATION • BOOKING & UI',
+          title: 'Northstar Travel',
+          repoUrl: 'https://github.com/YasenK90/northstar-travel',
+          summary: 'Modern travel discovery and itinerary showcase platform featuring curated destinations, responsive layouts, and seamless trip planning UX.',
+          highlights: [
+            'Dynamic destination filtering and curated region discovery with instant UI state updates.',
+            'Interactive itinerary cards showcasing schedules, highlights, and trip breakdowns.',
+            'High-contrast editorial visual storytelling engineered for crisp responsiveness across viewports.',
+            'Lightweight vanilla front-end architecture tuned for fast initial render and smooth transitions.'
+          ],
+          tags: ['JavaScript', 'HTML5', 'CSS3', 'UI/UX']
+        },
+        'afterlater': {
+          category: 'REPO // 06 — PRODUCTIVITY • WEB APP',
+          title: 'Afterlater',
+          repoUrl: 'https://github.com/YasenK90/afterlater',
+          summary: 'Minimalist task deferral, time-capsule, and asynchronous scheduling web application designed to clear mental clutter without notification noise.',
+          highlights: [
+            'Frictionless capture workflow that lets users defer thoughts and tasks out of immediate view.',
+            'Scheduled resurfacing queues that bring items back only when their chosen window arrives.',
+            'Local-first persistence ensuring instant interactions and zero-latency state changes.',
+            'Distraction-free, keyboard-friendly interface built to eliminate constant alert fatigue.'
+          ],
+          tags: ['TypeScript', 'React', 'Local-First', 'UI']
+        }
+      };
+
+      const modal = document.getElementById('projectModal');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const modalActionBtn = document.getElementById('modalActionBtn');
+      const modalRepoLink = document.getElementById('modalRepoLink');
+
+      function openProjectModal(key) {
+        const data = projectData[key];
+        if (!data) return;
+
+        document.getElementById('modalCategory').textContent = data.category;
+        document.getElementById('modalTitle').textContent = data.title;
+        document.getElementById('modalSummary').textContent = data.summary;
+        if (modalRepoLink) {
+          modalRepoLink.href = data.repoUrl || 'https://github.com/YasenK90';
+        }
+
+        const highlightsEl = document.getElementById('modalHighlights');
+        highlightsEl.innerHTML = data.highlights
+          .map((item) => `<li class="flex items-start gap-2.5"><span class="text-ember">+</span><span>${item}</span></li>`)
+          .join('');
+
+        const tagsEl = document.getElementById('modalTags');
+        tagsEl.innerHTML = data.tags
+          .map((tag) => `<span class="px-2.5 py-1 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/85">${tag}</span>`)
+          .join('');
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      // Live GitHub API enrichment with graceful silent fallback
+      async function enrichReposFromGitHub() {
+        try {
+          const response = await fetch('https://api.github.com/users/YasenK90/repos?per_page=100', {
+            headers: { Accept: 'application/vnd.github+json' }
+          });
+          if (!response.ok) return;
+          const repos = await response.json();
+          if (!Array.isArray(repos)) return;
+
+          const repoByName = new Map(repos.map((repo) => [repo.name.toLowerCase(), repo]));
+
+          Object.keys(projectData).forEach((slug) => {
+            const live = repoByName.get(slug.toLowerCase());
+            if (!live) return;
+
+            if (live.html_url) {
+              projectData[slug].repoUrl = live.html_url;
+            }
+
+            if (live.description && live.description.trim().length > 0) {
+              projectData[slug].summary = live.description.trim();
+              const descEl = document.querySelector(`[data-repo-desc="${slug}"]`);
+              if (descEl) descEl.textContent = live.description.trim();
+            }
+
+            if (live.language) {
+              const existing = projectData[slug].tags;
+              if (!existing.some((t) => t.toLowerCase() === live.language.toLowerCase())) {
+                projectData[slug].tags = [live.language, ...existing];
+              }
+              const tagsContainer = document.querySelector(`[data-repo-tags="${slug}"]`);
+              if (tagsContainer) {
+                tagsContainer.innerHTML = projectData[slug].tags
+                  .map((tag) => `<span class="px-2 py-0.5 rounded bg-obsidian border border-char font-mono text-[11px] text-whiteAsh/80">${tag}</span>`)
+                  .join('');
+              }
+            }
+
+            const metaEl = document.querySelector(`[data-repo-meta="${slug}"]`);
+            if (metaEl) {
+              const parts = [];
+              if (typeof live.stargazers_count === 'number' && live.stargazers_count > 0) {
+                parts.push(`★ ${live.stargazers_count}`);
+              }
+              if (live.pushed_at || live.updated_at) {
+                const updated = new Date(live.pushed_at || live.updated_at);
+                if (!Number.isNaN(updated.getTime())) {
+                  parts.push(updated.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }));
+                }
+              }
+              if (parts.length > 0) {
+                metaEl.textContent = parts.join(' • ');
+              }
+            }
+          });
+        } catch (_) {
+          // Silent fallback to curated defaults
+        }
+      }
+      enrichReposFromGitHub();
+
+      function closeProjectModal() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+
+      document.querySelectorAll('[data-project]').forEach((card) => {
+        card.addEventListener('click', () => openProjectModal(card.dataset.project));
+      });
+
+      closeModalBtn.addEventListener('click', closeProjectModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeProjectModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeProjectModal();
+      });
+
+      modalActionBtn.addEventListener('click', () => {
+        closeProjectModal();
+        const terminalSection = document.getElementById('terminal');
+        terminalSection.scrollIntoView({ behavior: 'smooth' });
+        runTerminalCommand('contact');
+      });
+
+      /* =====================================================================
+         4. INTERACTIVE FOOTER TERMINAL & CLIPBOARD COPY
+         ===================================================================== */
+      const terminalOutput = document.getElementById('terminalOutput');
+      const terminalForm = document.getElementById('terminalForm');
+      const terminalInput = document.getElementById('terminalInput');
+
+      const commandResponses = {
+        help: 'Available commands: <span class="text-moltenGold">whoami</span>, <span class="text-moltenGold">projects</span>, <span class="text-moltenGold">skills</span>, <span class="text-moltenGold">contact</span>, <span class="text-moltenGold">clear</span>',
+        whoami: 'Yasen Khaled (<span class="text-moltenGold">@YasenK90</span>) — Software Engineer, Embedded/Systems Builder &amp; Application Security Researcher. GitHub: <span class="text-moltenGold">https://github.com/YasenK90</span>',
+        projects: '[01] <span class="text-moltenGold">defacement-monitor</span> (Sentinel SaaS) | [02] <span class="text-moltenGold">obsidian-security</span> (AppSec Toolkit) | [03] <span class="text-moltenGold">sol-monitor</span> (AI Lead Generation) | [04] <span class="text-moltenGold">offscript-academy</span> (EdTech Platform) | [05] <span class="text-moltenGold">northstar-travel</span> (Travel Web App) | [06] <span class="text-moltenGold">afterlater</span> (Task Deferral App)',
+        skills: 'OFFSEC &amp; ROUTING: Web/API Auditing, Local Proxy Extensions, LLM/API Routing | SYSTEMS &amp; WEB: Node.js, TypeScript, React, Python, Supabase, Redis, AI Pipelines.',
+        contact: 'GitHub: <span class="text-moltenGold">https://github.com/YasenK90</span> | Email: <span class="text-moltenGold">yasen@sec-forge.dev</span> — Status: <span class="text-ember">OPEN FOR AUDITS &amp; ENGINEERING</span>.'
+      };
+
+      function appendTerminalLine(htmlContent, isCommand = false) {
+        const div = document.createElement('div');
+        if (isCommand) {
+          div.innerHTML = `<span class="text-ember">guest@yasen:~$</span> <span class="text-whiteAsh">${htmlContent}</span>`;
+        } else {
+          div.className = 'text-soot leading-relaxed pl-2 border-l border-char';
+          div.innerHTML = htmlContent;
+        }
+        terminalOutput.appendChild(div);
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+      }
+
+      function runTerminalCommand(rawCmd) {
+        const cmd = rawCmd.trim().toLowerCase();
+        if (!cmd) return;
+
+        if (cmd === 'clear') {
+          terminalOutput.innerHTML = '';
+          return;
+        }
+
+        appendTerminalLine(cmd, true);
+
+        if (commandResponses[cmd]) {
+          appendTerminalLine(commandResponses[cmd]);
+        } else {
+          appendTerminalLine(`Command not found: <span class="text-ember">${cmd}</span>. Type <span class="text-moltenGold">help</span> for valid commands.`);
+        }
+      }
+
+      terminalForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        runTerminalCommand(terminalInput.value);
+        terminalInput.value = '';
+      });
+
+      document.querySelectorAll('.quick-cmd').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          runTerminalCommand(btn.dataset.cmd);
+        });
+      });
+
+      // Copy Email with iFrame-safe execCommand fallback
+      const copyEmailBtn = document.getElementById('copyEmailBtn');
+      const copyEmailText = document.getElementById('copyEmailText');
+      copyEmailBtn.addEventListener('click', () => {
+        const email = 'yasen@sec-forge.dev';
+        const tempInput = document.createElement('input');
+        tempInput.value = email;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+
+        const original = copyEmailText.textContent;
+        copyEmailText.textContent = 'COPIED TO CLIPBOARD';
+        copyEmailText.classList.add('text-moltenGold');
+        setTimeout(() => {
+          copyEmailText.textContent = original;
+          copyEmailText.classList.remove('text-moltenGold');
+        }, 2000);
+      });
+    })();
+  </script>
+</body>
+</html>
